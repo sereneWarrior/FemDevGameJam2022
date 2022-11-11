@@ -5,8 +5,7 @@ using UnityEngine;
 public static class GameManger
 {
     [Header("REFERENCES")]
-    public static Transform playerTrans;
-    public static IDamagable playerDamagable;
+    public static Unit playerUnit;
     public static List<IDamagable> unitList = new List<IDamagable>();
 
     // Events

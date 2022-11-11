@@ -31,7 +31,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5110078627448427435}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -107,7 +107,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5110078627603542616}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
@@ -182,7 +182,7 @@ RectTransform:
   m_Children:
   - {fileID: 5110078625731578908}
   m_Father: {fileID: 5110078627603542616}
-  m_RootOrder: -1
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
@@ -222,7 +222,7 @@ RectTransform:
   - {fileID: 5110078627424521156}
   - {fileID: 5110078627448427435}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -292,6 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65cabcc5e57060343bf2b8784ea9a49c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  punchRotation: {x: 0, y: 0, z: 5}
+  punchDuration: 0.25
   offset: {x: 0, y: 2, z: 0}
-  targetValue: 0
   mainSliderUI: {fileID: 5110078627603542617}

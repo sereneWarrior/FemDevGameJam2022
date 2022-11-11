@@ -9,8 +9,7 @@ public class EnemyAI : MonoBehaviour
 {
     [Header("REFERENCES")]
     private Unit unit;
-    private Transform playerTrans;
-    private IDamagable playerDamagable;
+    private Unit playerUnit;
     private NavMeshAgent agent;
 
     public void Awake()
@@ -21,14 +20,13 @@ public class EnemyAI : MonoBehaviour
 
     public void OnEnable()
     {
-        playerTrans = GameManger.playerTrans;
-        playerDamagable = GameManger.playerDamagable;
+        playerUnit = GameManger.playerUnit;
         UnitHealthBarHandler.instance.RequestHealthBar(unit);
     }
 
     private void FixedUpdate()
     {
-        Move(playerTrans.position);
+        Move(playerUnit.transform.position);
     }
 
     /// <summary>

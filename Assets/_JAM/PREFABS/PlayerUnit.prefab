@@ -193,12 +193,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 774439c05b0d1c94b9b902ba4fabdd5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCD: 0.5
-  targetRange: 5
+  spellList:
+  - {fileID: 11400000, guid: 5ff498ef9dd70644198d84f93554adbc, type: 2}
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
-  attackTimer: 0
   target: {fileID: 0}
 --- !u!54 &559746813
 Rigidbody:

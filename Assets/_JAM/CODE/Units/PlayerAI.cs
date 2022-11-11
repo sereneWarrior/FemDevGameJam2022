@@ -1,69 +1,79 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
+
+/// <summary>
+/// Do not check range again if we already check for targets with same or higher range
+/// Target check is not optimized. Its really shitty
+/// </summary>
 
 [RequireComponent(typeof(Unit))]
 public class PlayerAI : MonoBehaviour
 {
     [Header("DESIGN")]
-    public float attackCD = 0.5f;
-    public float targetRange = 5;
+    public List<BaseSpell> spellList = new List<BaseSpell>();
     public LayerMask targetLayer;
 
-    [Header("DATA")]
-    public float attackTimer;
-
     [Header("REFERENCES")]
+    private Unit unit;
     public Unit target;
 
     public void Awake()
     {
-        GameManger.playerTrans = this.transform;
-        GameManger.playerDamagable = this.GetComponent<IDamagable>();
+        unit = this.GetComponent<Unit>();
+        GameManger.playerUnit = unit;
     }
 
     public void OnEnable()
     {
-        attackTimer = attackCD;
+        foreach (BaseSpell spell in spellList)
+        {
+            spell.SetupSpell();
+        }
     }
 
     public void Update()
     {
-        if(CheckIfTargetIsValid())
-            TryAttackTarget();
-    }
-
-    /// <summary>
-    /// We try to attack the Target
-    /// </summary>
-    private void TryAttackTarget()
-    {
-        if (attackTimer <= 0)
+        foreach (BaseSpell spell in spellList)
         {
-            target.GetDamage(1);
-            attackTimer = attackCD;
+            if (CheckIfTargetIsValid(spell))
+            {
+                if (TryToUseSpell(spell))
+                    return;
+            }
         }
-        else
-            attackTimer -= Time.deltaTime;
     }
 
     /// <summary>
-    /// We check if target is valid
+    /// We try to attack the Target with a Spell
     /// </summary>
+    private bool TryToUseSpell(BaseSpell _spell)
+    {
+        if (_spell.CheckSpellCooldown())
+        {
+            _spell.CastSpell(target);
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// We check if the Target is Valid for this spell
+    /// </summary>
+    /// <param name="_spell"></param>
     /// <returns></returns>
-    private bool CheckIfTargetIsValid()
+    private bool CheckIfTargetIsValid(BaseSpell _spell)
     {
         if (target == null)
-            TryGetTarget(targetRange);
+            TryGetTarget(_spell.modifiedRange);
 
         if (target == null)
             return false;
         else
         {
             // If our current Target is outside of our Range
-            if (Vector3.Distance(target.transform.position, transform.position) > targetRange)
+            if (Vector3.Distance(target.transform.position, transform.position) > _spell.modifiedRange)
             {
                 RemoveTarget();
                 return false;
@@ -108,6 +118,12 @@ public class PlayerAI : MonoBehaviour
     public void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, targetRange);
+
+        foreach (BaseSpell spell in spellList)
+        {
+            if(spell != null)
+                Gizmos.DrawWireSphere(transform.position, spell.modifiedRange);
+        }
+
     }
 }
