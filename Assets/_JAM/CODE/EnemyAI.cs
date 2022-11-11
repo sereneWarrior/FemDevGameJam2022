@@ -24,6 +24,10 @@ public class EnemyAI : MonoBehaviour
         playerTrans = GameManger.playerTrans;
         playerDamagable = GameManger.playerDamagable;
         UnitHealthBarHandler.instance.RequestHealthBar(unit);
+    }
+
+    private void FixedUpdate()
+    {
         Move(playerTrans.position);
     }
 
