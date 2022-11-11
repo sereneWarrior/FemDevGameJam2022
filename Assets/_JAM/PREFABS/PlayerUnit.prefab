@@ -195,6 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellList:
   - {fileID: 11400000, guid: 5ff498ef9dd70644198d84f93554adbc, type: 2}
+  - {fileID: 11400000, guid: dc6ae112a2ce6d5429fb824749bb12e9, type: 2}
   targetLayer:
     serializedVersion: 2
     m_Bits: 64

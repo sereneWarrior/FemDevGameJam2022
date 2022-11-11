@@ -5,6 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Do not check range again if we already check for targets with same or higher range
 /// Target check is not optimized. Its really shitty
+/// Targeting must be inside the Spell because each spell has different target conditions
 /// </summary>
 
 [RequireComponent(typeof(Unit))]
@@ -124,6 +125,5 @@ public class PlayerAI : MonoBehaviour
             if(spell != null)
                 Gizmos.DrawWireSphere(transform.position, spell.modifiedRange);
         }
-
     }
 }
