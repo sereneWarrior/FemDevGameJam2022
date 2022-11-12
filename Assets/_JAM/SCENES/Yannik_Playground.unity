@@ -452,7 +452,7 @@ PrefabInstance:
     - target: {fileID: 9070569888444335892, guid: d83a38ed4ced10c419ec205e10afc770,
         type: 3}
       propertyPath: attackDistance
-      value: 1.5
+      value: 1.25
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2556559725832364845, guid: d83a38ed4ced10c419ec205e10afc770, type: 3}
@@ -759,7 +759,7 @@ PrefabInstance:
     - target: {fileID: 9070569888444335892, guid: d83a38ed4ced10c419ec205e10afc770,
         type: 3}
       propertyPath: attackDistance
-      value: 1.5
+      value: 1.25
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2556559725832364845, guid: d83a38ed4ced10c419ec205e10afc770, type: 3}
@@ -1053,7 +1053,7 @@ PrefabInstance:
     - target: {fileID: 9070569888444335892, guid: d83a38ed4ced10c419ec205e10afc770,
         type: 3}
       propertyPath: attackDistance
-      value: 1.5
+      value: 1.25
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2556559725832364845, guid: d83a38ed4ced10c419ec205e10afc770, type: 3}
@@ -1894,7 +1894,7 @@ PrefabInstance:
     - target: {fileID: 9070569888444335892, guid: d83a38ed4ced10c419ec205e10afc770,
         type: 3}
       propertyPath: attackDistance
-      value: 1.5
+      value: 1.25
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2556559725832364845, guid: d83a38ed4ced10c419ec205e10afc770, type: 3}

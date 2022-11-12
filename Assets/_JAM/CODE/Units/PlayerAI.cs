@@ -19,6 +19,6 @@ public class PlayerAI : MonoBehaviour
 
     public void OnEnable()
     {
-        UnitHealthBarHandler.instance.RequestHealthBar(unit);
+        UnitHealthBarHandler.instance.RequestHealthBar(unit, true);
     }
 }

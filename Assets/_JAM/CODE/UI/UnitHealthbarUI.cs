@@ -11,28 +11,42 @@ public class UnitHealthbarUI : MonoBehaviour
     public float punchDuration = 1;
     [Tooltip("Can be used to offset the position of the Healthbar")]
     public Vector3 offset;
+    [Tooltip("Time that has to pass in order to activate the Tween of the slider values")]
+    public float sliderTweenWaitTime = 2f;
+    [Tooltip("Time that the tweening of the values takes")]
+    public float sliderTweenValueTime = 1f;
 
     [Header("REFERENCES")]
-    [Header("The Main Health Slider")]
-    public Slider mainSliderUI;
-    private RectTransform mainSliderRect;
+    [Header("Health Sliders")]
+    public Image mainSliderUI;
+    public Image delayedSliderUI;
+    public Image backgroundSliderUI;
     [Header("The unit this Slider should represent")]
     private Unit unit;
 
+    private RectTransform ownRectTransform;
+    private Camera camMain;
+    private float lastHitTime;
+    private bool hasTweenedSlider = true;
+
     private void Awake()
     {
-        mainSliderRect = mainSliderUI.GetComponent<RectTransform>();
+        ownRectTransform = gameObject.GetComponent<RectTransform>();
+        camMain = Camera.main;
     }
 
     /// <summary>
     /// We set the Slider values and subscribe to callbacks
     /// </summary>
     /// <param name="_unit"></param>
-    public void SetupHealthBar(Unit _unit)
+    public void SetupHealthBar(Unit _unit, Color mainSliderColor, Color delaySliderColor, Color sliderBackgroundColor)
     {
-        // We set the Slider Values
-        mainSliderUI.maxValue = _unit.maxHealth;
-        mainSliderUI.value = _unit.curHealth;
+        //Setup sliders
+        mainSliderUI.color = mainSliderColor;
+        delayedSliderUI.color = delaySliderColor;
+        backgroundSliderUI.color = sliderBackgroundColor;
+        mainSliderUI.fillAmount = 1;
+        delayedSliderUI.fillAmount = 1;
 
         // We save the Unit reference and subscribe to the Life change callback
         unit = _unit;
@@ -55,6 +69,7 @@ public class UnitHealthbarUI : MonoBehaviour
     public void FixedUpdate()
     {
         UpdateHealthBarPos();
+        CheckForSliderTween();
     }
 
     /// <summary>
@@ -67,7 +82,20 @@ public class UnitHealthbarUI : MonoBehaviour
             return;
 
         // We convert the World to Screen Pos
-        transform.position = Camera.main.WorldToScreenPoint(unit.transform.position + offset);
+        transform.position = camMain.WorldToScreenPoint(unit.transform.position + offset);
+    }
+
+    void CheckForSliderTween()
+    {
+        if(!hasTweenedSlider && Time.time - lastHitTime > sliderTweenWaitTime)
+        {
+            hasTweenedSlider = true;
+            DOTween.Kill(ownRectTransform);
+            ownRectTransform.rotation = Quaternion.identity;
+            ownRectTransform.localScale = Vector3.one;
+            ownRectTransform.DOShakeScale(0.5f, 0.5f);
+            delayedSliderUI.DOFillAmount(mainSliderUI.fillAmount, sliderTweenValueTime);
+        }
     }
 
     /// <summary>
@@ -76,10 +104,12 @@ public class UnitHealthbarUI : MonoBehaviour
     /// <param name="_curHealth"></param>
     public void UpdateSlider(float _curHealth)
     {
-        mainSliderUI.value = _curHealth;
-        mainSliderRect.rotation = Quaternion.identity;
-        DOTween.Kill(gameObject);
-        mainSliderRect.DOPunchRotation(punchRotation, punchDuration);
+        mainSliderUI.fillAmount = Utils.ConvertRange(0, unit.maxHealth, 0, 1, _curHealth);
+        DOTween.Kill(ownRectTransform);
+        ownRectTransform.rotation = Quaternion.identity;
+        ownRectTransform.DOPunchRotation(punchRotation, punchDuration);
+        lastHitTime = Time.time;
+        hasTweenedSlider = false;
     }
 
     /// <summary>

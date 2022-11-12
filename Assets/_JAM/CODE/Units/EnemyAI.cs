@@ -31,7 +31,7 @@ public class EnemyAI : MonoBehaviour
 
     private void OnEnable()
     {
-        UnitHealthBarHandler.instance.RequestHealthBar(unit);
+        UnitHealthBarHandler.instance.RequestHealthBar(unit, false);
     }
 
     private void OnDisable()
