@@ -14,7 +14,7 @@ public class PlayerInput : MonoBehaviour
         canReadInput = true;
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         if (canReadInput)
         {

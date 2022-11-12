@@ -9,20 +9,27 @@ public class PlayerMovement : MonoBehaviour
     PlayerInput playerInput;
     Rigidbody ownRigidbody;
 
+    Vector3 input;
+
     private void Awake()
     {
         ownRigidbody = GetComponent<Rigidbody>();
         playerInput = GetComponent<PlayerInput>();
-        playerInput.onPlayerInput += MovePlayer;
+        playerInput.onPlayerInput += GetInput;
     }
 
-    void MovePlayer(Vector3 input)
+    void GetInput(Vector3 input)
+    {
+        this.input = input;
+    }
+
+    void FixedUpdate()
     {
         ownRigidbody.MovePosition(ownRigidbody.position + input * moveSpeed * Time.fixedDeltaTime);
     }
 
     private void OnDestroy()
     {
-        playerInput.onPlayerInput -= MovePlayer;
+        playerInput.onPlayerInput -= GetInput;
     }
 }
