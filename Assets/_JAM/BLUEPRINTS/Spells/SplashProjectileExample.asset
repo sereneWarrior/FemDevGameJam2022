@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: BaseSpell
   damage: 1
-  modifiedDamage: 0
+  modifiedDamage: 1
   cooldown: 0.25
-  modifiedCD: 0
+  modifiedCD: 0.25
   range: 5
-  modifiedRange: 0
-  splashRadius: 5
-  modifiedSplashRadius: 0
-  projectileSpeed: 1
-  modifiedSpeed: 0
-  projectilePrefab: {fileID: 0}
+  modifiedRange: 5
+  splashRadius: 2
+  modifiedSplashRadius: 2
+  projectileSpeed: 5
+  modifiedSpeed: 5
+  projectilePrefab: {fileID: 3989755456691343760, guid: c330ac642d25bfc4380eae76a44ff95a,
+    type: 3}
