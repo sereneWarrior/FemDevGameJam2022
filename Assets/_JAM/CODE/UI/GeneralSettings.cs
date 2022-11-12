@@ -39,6 +39,9 @@ public class GeneralSettings : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.instance.Play("BG");
+
+
         //Loading Screen Settings
         if (PlayerPrefs.HasKey("ScreenResolution"))
         {
