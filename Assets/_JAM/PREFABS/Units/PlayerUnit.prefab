@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 774439c05b0d1c94b9b902ba4fabdd5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  castPosOffset: {x: 0, y: 1, z: 0}
+  castPosOffset: {x: 0, y: 1.5, z: 0}
   spellLayer:
     serializedVersion: 2
     m_Bits: 64

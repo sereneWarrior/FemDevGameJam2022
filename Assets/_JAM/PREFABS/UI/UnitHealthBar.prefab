@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65cabcc5e57060343bf2b8784ea9a49c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  punchRotation: {x: 0, y: 0, z: 5}
-  punchDuration: 0.25
+  punchRotation: {x: 0, y: 0, z: 10}
+  punchDuration: 0.1
   offset: {x: 0, y: 2, z: 0}
   mainSliderUI: {fileID: 5110078627603542617}
