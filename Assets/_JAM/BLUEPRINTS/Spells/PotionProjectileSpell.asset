@@ -19,6 +19,8 @@ MonoBehaviour:
   modifiedCD: 1
   range: 15
   modifiedRange: 15
+  splashRadius: 1
+  modifiedSplashRadius: 5
   projectileSpeed: 7
   modifiedSpeed: 7
   projectilePrefab: {fileID: 3730549586382490163, guid: 2d7ee8eb21032e3419cfa94c9c9c5536,

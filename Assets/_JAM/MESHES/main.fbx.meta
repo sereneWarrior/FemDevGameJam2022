@@ -12,6 +12,12 @@ ModelImporter:
   - first:
       74: -4838493363668146491
     second: 0TPose.001
+  - first:
+      74: -2187060897482265395
+    second: 0TPose.001 (1)
+  - first:
+      74: -784307399427666691
+    second: walkl
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -42,11 +48,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: 0TPose
-      takeName: 0TPose
+      name: walkl
+      takeName: walkl
       internalID: 0
       firstFrame: 0
-      lastFrame: 1
+      lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
