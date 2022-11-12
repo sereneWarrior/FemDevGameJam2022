@@ -32,12 +32,21 @@ public static class GameManger
         unitList.Remove(_unit);
     }
 
-
     public static void PauseGame(bool isPaused)
     {
         if (isPaused)
             Time.timeScale = 0;
         else
             Time.timeScale = 1;
+    }
+
+    /// <summary>
+    /// We send the Unit Death Event
+    /// </summary>
+    /// <param name="_unit"></param>
+    public static void SendUnitDeathEvent(Unit _unit)
+    {
+        if (onUnitDeath != null)
+            onUnitDeath(_unit);
     }
 }
