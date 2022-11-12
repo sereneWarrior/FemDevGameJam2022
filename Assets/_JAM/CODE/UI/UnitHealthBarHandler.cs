@@ -40,9 +40,9 @@ public class UnitHealthBarHandler : MonoBehaviour
         // We get the Healthbar and Set everything up
         UnitHealthbarUI tempBar = healthBarQueue.Dequeue();
         if(isPlayer)
-            tempBar.SetupHealthBar(_unit, enemyMainSliderColor, enemyDelaySliderColor, enemyBackgroundSliderColor);
-        else
             tempBar.SetupHealthBar(_unit, playerMainSliderColor, playerDelaySliderColor, playerBackgroundSliderColor);
+        else
+            tempBar.SetupHealthBar(_unit, enemyMainSliderColor, enemyDelaySliderColor, enemyBackgroundSliderColor);
         tempBar.gameObject.SetActive(true);
     }
 

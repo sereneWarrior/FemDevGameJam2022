@@ -53,8 +53,8 @@ MonoBehaviour:
   punchRotation: {x: 0, y: 0, z: 10}
   punchDuration: 0.1
   offset: {x: 0, y: 2, z: 0}
-  sliderTweenWaitTime: 2
-  sliderTweenValueTime: 1
+  sliderTweenWaitTime: 1
+  sliderTweenValueTime: 0.75
   mainSliderUI: {fileID: 6883879221376679973}
   delayedSliderUI: {fileID: 4165876556282412695}
   backgroundSliderUI: {fileID: 6785662803655532305}
