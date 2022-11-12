@@ -1,44 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class SpellCaster : MonoBehaviour
+public class SpellCaster : MonoBehaviour, IPausable
 {
     [Header("DESIGN")]
     [Tooltip("The Offset from the Player position from which we cast the Spells")]
     public Vector3 castPosOffset = new Vector3(0, 1.5f, 0);
     [Tooltip("List that holds all the spells we can currently cast")]
-    public List<BaseSpell> spellList = new List<BaseSpell>();
+    public List<SpellContainer> spellList = new List<SpellContainer>();
+
+    [Header("DATA")]
+    public bool isPaused = false;
 
     [Header("REUSABLES")]
     private Vector3 castPos;
 
     public void OnEnable()
     {
-        foreach (BaseSpell spell in spellList)
+        foreach (SpellContainer spell in spellList)
         {
-            spell.SetupSpell();
+            spell.level = 0;
         }
+
+        GameManger.onPauseGame += PauseCode;
+        GameManger.onUnpauseGame += UnpauseCode;
+    }
+
+    public void OnDisable()
+    {
+        GameManger.onPauseGame -= PauseCode;
+        GameManger.onUnpauseGame -= UnpauseCode;
     }
 
     public void Update()
     {
-        foreach (BaseSpell spell in spellList)
+        foreach (SpellContainer spell in spellList)
         {
-            if (TryToUseSpell(spell))
-                return;
+            if(spell.learned)
+                if (TryToUseSpell(spell.spellReference, spell.level))
+                    return;
         }
     }
 
     /// <summary>
     /// We try to attack the Target with a Spell
     /// </summary>
-    private bool TryToUseSpell(BaseSpell _spell)
+    private bool TryToUseSpell(BaseSpell _spell, int _spellLevel)
     {
         if (_spell.CheckSpellCooldown())
         {
             // We get a target for the Spell
-            Unit target = Utilities.GetNearestTargetInRange(transform.position, _spell.modifiedRange, GameManger.enemyLayer);
+            Unit target = Utilities.GetNearestTargetInRange(transform.position, _spell.leveledSpellStats[_spellLevel].range, GameManger.enemyLayer);
 
             // If we did not get a target we return
             if (target == null)
@@ -46,10 +60,35 @@ public class SpellCaster : MonoBehaviour
 
             // Else we cast the Spell
             castPos = new Vector3(transform.position.x + castPosOffset.x, transform.position.y + castPosOffset.y, transform.position.z + castPosOffset.z);
-            _spell.CastSpell(target, castPos);
+            _spell.CastSpell(target, castPos, _spellLevel);
             return true;
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// We upgrade the Spell with the given id in the SpellContainer
+    /// </summary>
+    /// <param name="_containerID"></param>
+    private void UpgradeSpell(float _containerID)
+    {
+
+    }
+
+    /// <summary>
+    /// We pause this Code
+    /// </summary>
+    public void PauseCode()
+    {
+        isPaused = true;
+    }
+
+    /// <summary>
+    /// We unpause this Code
+    /// </summary>
+    public void UnpauseCode()
+    {
+        isPaused = false;
     }
 }

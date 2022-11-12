@@ -7,18 +7,15 @@ using UnityEngine;
 public class ProjectileSpell : BaseSpell
 {
     [Header("PROJECTILE SPELL")]
-    [SerializeField] private float projectileSpeed = 5;
-    [HideInInspector] public float modifiedSpeed;
-    public Projectile projectilePrefab;
+    [Tooltip("Speed of the Projectile we shoot")]
+    public float projectileSpeed = 5;
+    public SpellProjectile projectilePrefab;
 
     /// <summary>
     /// We Setup this Spell
     /// </summary>
-    public override void SetupSpell()
+    public void SetupSpell()
     {
-        base.SetupSpell();
-        modifiedSpeed = projectileSpeed;
-
         if (projectilePrefab == null)
             Debug.LogError("ProjectileSpell: We did not reference the Projectile!");
     }
@@ -28,9 +25,10 @@ public class ProjectileSpell : BaseSpell
     /// </summary>
     /// <param name="_target"></param>
     /// <param name="_castPos"></param>
-    public override void CastSpell(Unit _target, Vector3 _castPos)
+    /// <param name="_spellLevel"></param>
+    public override void CastSpell(Unit _target, Vector3 _castPos, int _spellLevel)
     {
-        Instantiate(projectilePrefab, _castPos, Quaternion.identity).SetupProjectile(_target, modifiedDamage, modifiedSpeed, modifiedSplashRadius);
-        base.CastSpell(_target, _castPos);
+        Instantiate(projectilePrefab, _castPos, Quaternion.identity).SetupProjectile(_target, leveledSpellStats[_spellLevel].damage, projectileSpeed, leveledSpellStats[_spellLevel].splashRadius);
+        base.CastSpell(_target, _castPos, _spellLevel);
     }
 }

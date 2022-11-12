@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curHealth: 0
-  maxHealth: 10
+  maxHealth: 3
 --- !u!195 &9070569888444335894
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class SpellProjectile : MonoBehaviour, IPausable
 {
     [Header("DESIGN")]
     [Tooltip("From what distance to the target to disable this")]
     public float targetReachedTreshold = 0.2f;
 
     [Header("DATA")]
+    public bool isPaused = false;
     [Tooltip("How much damage this Projectile makes")]
     private float damage;
     [Tooltip("Speed of the Projectile")]
@@ -25,6 +26,18 @@ public class Projectile : MonoBehaviour
 
     [Header("REFERENCES")]
     private Unit targetUnit;
+
+    public void OnEnable()
+    {
+        GameManger.onPauseGame += PauseCode;
+        GameManger.onUnpauseGame += UnpauseCode;
+    }
+
+    public void OnDisable()
+    {
+        GameManger.onPauseGame -= PauseCode;
+        GameManger.onUnpauseGame -= UnpauseCode;
+    }
 
     /// <summary>
     /// We Setup the Projectile
@@ -44,6 +57,9 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
+        if (isPaused)
+            return;
+
         MoveProjectile();
         CheckDistance();
     }
@@ -103,5 +119,21 @@ public class Projectile : MonoBehaviour
     {
         targetUnit.onUnitDisable -= DisableProjectile;
         Destroy(this.gameObject); // Later we need to add pooling
+    }
+
+    /// <summary>
+    /// We pause this Code
+    /// </summary>
+    public void PauseCode()
+    {
+        isPaused = true;
+    }
+
+    /// <summary>
+    /// We unpause this Code
+    /// </summary>
+    public void UnpauseCode()
+    {
+        isPaused = false;
     }
 }

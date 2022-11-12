@@ -7,42 +7,21 @@ public abstract class BaseSpell : ScriptableObject
     [Header("DESIGN")]
     [Tooltip("The name of the Spell")]
     public string spellName = "BaseSpell";
-    [Tooltip("How much Damage this spell does")]
-    [SerializeField] private float damage = 1;
-    [HideInInspector] public float modifiedDamage;
-    [Tooltip("How long until we can use this spell again")]
-    [SerializeField] private float cooldown = 0.25f;
-    [HideInInspector] public float modifiedCD;
-    [Tooltip("From how far away we can hit the Enemy")]
-    [SerializeField] private float range = 5;
-    [HideInInspector] public float modifiedRange;
-    [Tooltip("If we hit other enemies beside the Target in range")]
-    [SerializeField] private float splashRadius = 0;
-    [HideInInspector] public float modifiedSplashRadius;
+    [Tooltip("Holds the Stats for each Spell Level")]
+    public List<SpellStats> leveledSpellStats = new List<SpellStats>();
 
     [Header("DATA")]
     private float spellCDTimer;
-
-    /// <summary>
-    /// We Setup this Spell
-    /// </summary>
-    public virtual void SetupSpell()
-    {
-        modifiedDamage = damage;
-        modifiedCD = cooldown;
-        spellCDTimer = modifiedCD;
-        modifiedRange = range;
-        modifiedSplashRadius = splashRadius;
-    }
 
     /// <summary>
     /// We cast this spell
     /// </summary>
     /// <param name="_target"></param>
     /// <param name="_castPos"></param>
-    public virtual void CastSpell(Unit _target, Vector3 _castPos)
+    /// <param name="_spellLevel"></param>
+    public virtual void CastSpell(Unit _target, Vector3 _castPos, int _spellLevel)
     {
-        spellCDTimer = modifiedCD;
+        spellCDTimer = leveledSpellStats[_spellLevel].cooldown;
     }
 
     /// <summary>
@@ -59,6 +38,19 @@ public abstract class BaseSpell : ScriptableObject
             return false;
         }
     }
+}
+
+[System.Serializable]
+public class SpellStats
+{
+    [Tooltip("How much Damage this spell does")]
+    public float damage = 1;
+    [Tooltip("How long until we can use this spell again")]
+    public float cooldown = 0.25f;
+    [Tooltip("From how far away we can hit the Enemy")]
+    public float range = 5;
+    [Tooltip("If we hit other enemies beside the Target in range")]
+    public float splashRadius = 0;
 }
 
 

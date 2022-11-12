@@ -5,8 +5,11 @@ using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(Unit))]
-public class EnemyAI : MonoBehaviour
+public class EnemyAI : MonoBehaviour, IPausable
 {
+    [Header("DATA")]
+    public bool isPaused = false;
+
     [Header("REFERENCES")]
     private Unit unit;
     private Unit playerUnit;
@@ -32,11 +35,15 @@ public class EnemyAI : MonoBehaviour
     private void OnEnable()
     {
         UnitHealthBarHandler.instance.RequestHealthBar(unit, false);
+        GameManger.onPauseGame += PauseCode;
+        GameManger.onUnpauseGame += UnpauseCode;
     }
 
     private void OnDisable()
     {
         EnemyHandler.instance.unitsPoolingQueue.Enqueue(unit);
+        GameManger.onPauseGame -= PauseCode;
+        GameManger.onUnpauseGame += UnpauseCode;
     }
 
     private void Start()
@@ -48,6 +55,9 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
+        if (isPaused)
+            return;
+
         currentCooldown -= Time.deltaTime;
         if(playerTransform != null)
             if(currentCooldown <= 0 && (ownTransform.position - playerTransform.position).sqrMagnitude <= attackDistance * attackDistance)
@@ -59,6 +69,9 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isPaused)
+            return;
+
         Move(playerUnit.transform.position);
     }
 
@@ -69,5 +82,23 @@ public class EnemyAI : MonoBehaviour
     public void Move(Vector3 _pos)
     {
         agent.SetDestination(_pos);
+    }
+
+    /// <summary>
+    /// We pause this Code
+    /// </summary>
+    public void PauseCode()
+    {
+        isPaused = true;
+        agent.isStopped = true;
+    }
+
+    /// <summary>
+    /// We unpause this Code
+    /// </summary>
+    public void UnpauseCode()
+    {
+        isPaused = false;
+        agent.isStopped = false;
     }
 }

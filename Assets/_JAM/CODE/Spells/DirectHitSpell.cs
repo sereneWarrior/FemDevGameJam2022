@@ -6,17 +6,18 @@ using UnityEngine;
 public class DirectHitSpell : BaseSpell
 {
     /// <summary>
-    /// We cast this Spell
+    /// We cast this spell
     /// </summary>
     /// <param name="_target"></param>
     /// <param name="_castPos"></param>
-    public override void CastSpell(Unit _target, Vector3 _castPos)
+    /// <param name="_spellLevel"></param>
+    public override void CastSpell(Unit _target, Vector3 _castPos, int _spellLevel)
     {
-        if (modifiedSplashRadius == 0)
-            _target.GetDamage(modifiedDamage);
+        if (leveledSpellStats[_spellLevel].splashRadius == 0)
+            _target.GetDamage(leveledSpellStats[_spellLevel].damage);
         else
-            Utilities.DamageAllInRange(_target.transform.position, modifiedSplashRadius, modifiedDamage, GameManger.enemyLayer);
+            Utilities.DamageAllInRange(_target.transform.position, leveledSpellStats[_spellLevel].splashRadius, leveledSpellStats[_spellLevel].damage, GameManger.enemyLayer);
 
-        base.CastSpell(_target, _castPos);
+        base.CastSpell(_target, _castPos, _spellLevel);
     }
 }

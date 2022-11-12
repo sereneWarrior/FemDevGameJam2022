@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHandler : MonoBehaviour
+public class EnemyHandler : MonoBehaviour, IPausable
 {
     [Header("DESIGN")]
     [Tooltip("Size of the Spawn Area")]
@@ -13,6 +13,7 @@ public class EnemyHandler : MonoBehaviour
     public AnimationCurve spawnCdCurve;
 
     [Header("DATA")]
+    public bool isPaused = false;
     private float spawnCurvePos;
     private float spawnTimer;
     public Queue<Unit> unitsPoolingQueue = new Queue<Unit>();
@@ -25,6 +26,18 @@ public class EnemyHandler : MonoBehaviour
     private void Awake()
     {
         instance = this;
+    }
+
+    private void OnEnable()
+    {
+        GameManger.onPauseGame += PauseCode;
+        GameManger.onUnpauseGame += UnpauseCode;
+    }
+
+    private void OnDisable()
+    {
+        GameManger.onPauseGame -= PauseCode;
+        GameManger.onUnpauseGame -= UnpauseCode;
     }
 
     /// <summary>
@@ -59,6 +72,9 @@ public class EnemyHandler : MonoBehaviour
 
     private void Update()
     {
+        if (isPaused)
+            return;
+
         CheckTimer();
         CheckSpawnCurveProgress();
     }
@@ -91,5 +107,21 @@ public class EnemyHandler : MonoBehaviour
         }
         else
             spawnTimer -= Time.deltaTime;
+    }
+
+    /// <summary>
+    /// We pause this Code
+    /// </summary>
+    public void PauseCode()
+    {
+        isPaused = true;
+    }
+
+    /// <summary>
+    /// We unpause this Code
+    /// </summary>
+    public void UnpauseCode()
+    {
+        isPaused = false;
     }
 }

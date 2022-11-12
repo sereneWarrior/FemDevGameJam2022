@@ -5,14 +5,19 @@ using UnityEngine;
 public static class GameManger
 {
     [Header("DATA")]
+    public static bool stopTime = false;
     public static int enemyLayer = 1 << 6;
     public static Unit playerUnit;
     public static List<IDamagable> unitList = new List<IDamagable>();
 
-    // Events
+    // Unit Events
     public delegate void UnitEvents(Unit _unit);
     public static event UnitEvents onUnitSpawn;
     public static event UnitEvents onUnitDeath;
+
+    public delegate void GameEvents();
+    public static event GameEvents onPauseGame;
+    public static event GameEvents onUnpauseGame;
 
     /// <summary>
     /// We add a unit to the List
@@ -32,6 +37,28 @@ public static class GameManger
         unitList.Remove(_unit);
     }
 
+    /// <summary>
+    /// We send the Pause Game Event
+    /// </summary>
+    public static void SendPauseGameEvent()
+    {
+        if (onPauseGame != null)
+            onPauseGame();
+    }
+
+    /// <summary>
+    /// We send the Unpause Game Event
+    /// </summary>
+    public static void SendUnpauseGameEvent()
+    {
+        if (onUnpauseGame != null)
+            onUnpauseGame();
+    }
+
+    /// <summary>
+    /// We Pause the Game
+    /// </summary>
+    /// <param name="isPaused"></param>
     public static void PauseGame(bool isPaused)
     {
         if (isPaused)

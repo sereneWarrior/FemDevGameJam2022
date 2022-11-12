@@ -220,8 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetReachedTreshold: 0.2
   spawnOffset: {x: 0, y: 0, z: 0}
-  splashVFX: {fileID: 3531041630256257083, guid: 3df437845f093d946b0185a0feb03b40,
-    type: 3}
+  splashVFX: {fileID: 0}
 --- !u!1 &6222176330676383164
 GameObject:
   m_ObjectHideFlags: 0

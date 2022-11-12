@@ -196,7 +196,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   castPosOffset: {x: 0, y: 1.5, z: 0}
   spellList:
-  - {fileID: 11400000, guid: 58d220fa33b62d142b55e3d5cdacebbf, type: 2}
+  - learned: 1
+    level: 0
+    spellReference: {fileID: 11400000, guid: 58d220fa33b62d142b55e3d5cdacebbf, type: 2}
+  - learned: 0
+    level: 0
+    spellReference: {fileID: 11400000, guid: 4e334ff66b6d1c645992a1eaa0122903, type: 2}
+  - learned: 0
+    level: 0
+    spellReference: {fileID: 11400000, guid: bdd9ee03f36e69e4b91cecf559117da0, type: 2}
 --- !u!114 &8599991636797290070
 MonoBehaviour:
   m_ObjectHideFlags: 0

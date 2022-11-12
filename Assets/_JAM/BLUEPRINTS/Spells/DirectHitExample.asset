@@ -13,9 +13,24 @@ MonoBehaviour:
   m_Name: DirectHitExample
   m_EditorClassIdentifier: 
   spellName: BaseSpell
-  damage: 1
-  modifiedDamage: 0
-  cooldown: 0.25
-  modifiedCD: 0
-  range: 5
-  modifiedRange: 0
+  leveledSpellStats:
+  - damage: 1
+    cooldown: 0.25
+    range: 5
+    splashRadius: 0
+  - damage: 1
+    cooldown: 0.25
+    range: 5
+    splashRadius: 0
+  - damage: 1
+    cooldown: 0.25
+    range: 5
+    splashRadius: 0
+  - damage: 1
+    cooldown: 0.25
+    range: 5
+    splashRadius: 0
+  - damage: 1
+    cooldown: 0.25
+    range: 5
+    splashRadius: 0
