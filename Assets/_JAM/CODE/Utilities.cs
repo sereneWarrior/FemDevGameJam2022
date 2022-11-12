@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class Utilities
@@ -34,5 +35,24 @@ public static class Utilities
 
         // We return the nearest Unit
         return nearestUnit;
+    }
+
+    /// <summary>
+    /// We damage all in Range
+    /// </summary>
+    /// <param name="_startPos"></param>
+    /// <param name="_radius"></param>
+    /// <param name="_damage"></param>
+    /// <param name="_layerMask"></param>
+    public static void DamageAllInRange(Vector3 _startPos, float _radius, float _damage, LayerMask _layerMask)
+    {
+        // We get the Collider
+        Collider[] collider = Physics.OverlapSphere(_startPos, _radius, _layerMask);
+
+        // We go trough each collider and get the closest
+        foreach (Collider enemy in collider)
+        {
+            enemy.GetComponent<IDamagable>().GetDamage(_damage);
+        }
     }
 }

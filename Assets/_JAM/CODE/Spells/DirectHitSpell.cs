@@ -12,7 +12,11 @@ public class DirectHitSpell : BaseSpell
     /// <param name="_castPos"></param>
     public override void CastSpell(Unit _target, Vector3 _castPos)
     {
-        _target.GetDamage(modifiedDamage);
+        if (modifiedSplashRadius == 0)
+            _target.GetDamage(modifiedDamage);
+        else
+            Utilities.DamageAllInRange(_target.transform.position, modifiedSplashRadius, modifiedDamage, GameManger.enemyLayer);
+
         base.CastSpell(_target, _castPos);
     }
 }

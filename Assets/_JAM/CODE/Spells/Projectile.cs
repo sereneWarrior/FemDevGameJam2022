@@ -11,19 +11,24 @@ public class Projectile : MonoBehaviour
     [Header("DATA")]
     private float damage;
     private float speed;
+    private float splashRadius;
 
     [Header("REFERENCES")]
     private Unit targetUnit;
 
     /// <summary>
-    /// We setup this Projectile
+    /// We Setup the Projectile
     /// </summary>
     /// <param name="_unit"></param>
-    public void SetupProjectile(Unit _unit, float _damage, float _speed)
+    /// <param name="_damage"></param>
+    /// <param name="_speed"></param>
+    /// <param name="_splashRadius"></param>
+    public void SetupProjectile(Unit _unit, float _damage, float _speed, float _splashRadius = 0)
     {
         targetUnit = _unit;
         damage = _damage;
         speed = _speed;
+        splashRadius = _splashRadius;
         targetUnit.onUnitDisable += DisableProjectile;
     }
 
@@ -49,9 +54,20 @@ public class Projectile : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, targetUnit.transform.position) <= targetReachedTreshold)
         {
-            targetUnit.GetDamage(damage);
+            MakeDamage();
             DisableProjectile();
         }
+    }
+
+    /// <summary>
+    /// We damage the Target
+    /// </summary>
+    public void MakeDamage()
+    {
+        if (splashRadius == 0)
+            targetUnit.GetDamage(damage);
+        else
+            Utilities.DamageAllInRange(targetUnit.transform.position, splashRadius, damage, GameManger.enemyLayer);
     }
 
     /// <summary>

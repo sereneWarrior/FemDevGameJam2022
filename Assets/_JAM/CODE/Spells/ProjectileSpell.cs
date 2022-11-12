@@ -7,7 +7,7 @@ using UnityEngine;
 public class ProjectileSpell : BaseSpell
 {
     [Header("PROJECTILE SPELL")]
-    [SerializeField] public float projectileSpeed = 1;
+    [SerializeField] public float projectileSpeed = 5;
     [HideInInspector] public float modifiedSpeed;
     public Projectile projectilePrefab;
 
@@ -30,7 +30,7 @@ public class ProjectileSpell : BaseSpell
     /// <param name="_castPos"></param>
     public override void CastSpell(Unit _target, Vector3 _castPos)
     {
-        Instantiate(projectilePrefab, _castPos, Quaternion.identity).SetupProjectile(_target, modifiedDamage, modifiedSpeed);
+        Instantiate(projectilePrefab, _castPos, Quaternion.identity).SetupProjectile(_target, modifiedDamage, modifiedSpeed, modifiedSplashRadius);
         base.CastSpell(_target, _castPos);
     }
 }

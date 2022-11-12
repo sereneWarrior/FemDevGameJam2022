@@ -16,6 +16,9 @@ public abstract class BaseSpell : ScriptableObject
     [Tooltip("From how far away we can hit the Enemy")]
     [SerializeField] private float range = 5;
     [HideInInspector] public float modifiedRange;
+    [Tooltip("If we hit other enemies beside the Target in range")]
+    [SerializeField] private float splashRadius = 0;
+    [HideInInspector] public float modifiedSplashRadius;
 
     [Header("DATA")]
     private float spellCDTimer;
@@ -29,6 +32,7 @@ public abstract class BaseSpell : ScriptableObject
         modifiedCD = cooldown;
         spellCDTimer = modifiedCD;
         modifiedRange = range;
+        modifiedSplashRadius = splashRadius;
     }
 
     /// <summary>
@@ -56,3 +60,5 @@ public abstract class BaseSpell : ScriptableObject
         }
     }
 }
+
+

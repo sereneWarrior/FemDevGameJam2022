@@ -8,8 +8,6 @@ public class PlayerAI : MonoBehaviour
     [Header("DESIGN")]
     [Tooltip("The Offset from the Player position from which we cast the Spells")]
     public Vector3 castPosOffset = new Vector3(0,1,0);
-    [Tooltip("The Layer we use for the Enemy Check")]
-    public LayerMask spellLayer;
     [Tooltip("List that holds all the spells we can currently cast")]
     public List<BaseSpell> spellList = new List<BaseSpell>();
 
@@ -50,7 +48,7 @@ public class PlayerAI : MonoBehaviour
         if (_spell.CheckSpellCooldown())
         {
             // We get a target for the Spell
-            Unit target = Utilities.GetNearestTargetInRange(transform.position, _spell.modifiedRange, spellLayer);
+            Unit target = Utilities.GetNearestTargetInRange(transform.position, _spell.modifiedRange, GameManger.enemyLayer);
 
             // If we did not get a target we return
             if (target == null)

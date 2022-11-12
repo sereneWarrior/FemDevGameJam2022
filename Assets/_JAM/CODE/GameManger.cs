@@ -4,7 +4,8 @@ using UnityEngine;
 
 public static class GameManger
 {
-    [Header("REFERENCES")]
+    [Header("DATA")]
+    public static int enemyLayer = 1 << 6;
     public static Unit playerUnit;
     public static List<IDamagable> unitList = new List<IDamagable>();
 
