@@ -194,11 +194,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   castPosOffset: {x: 0, y: 1, z: 0}
-  spellList:
-  - {fileID: 11400000, guid: 58d220fa33b62d142b55e3d5cdacebbf, type: 2}
-  targetLayer:
+  spellLayer:
     serializedVersion: 2
     m_Bits: 64
+  spellList:
+  - {fileID: 11400000, guid: 58d220fa33b62d142b55e3d5cdacebbf, type: 2}
 --- !u!54 &559746813
 Rigidbody:
   m_ObjectHideFlags: 0

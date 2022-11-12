@@ -1876,5 +1876,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: eef4824ed10b7f1439c3b3e853cd4f60, type: 2}
+    - target: {fileID: 8599991636797290070, guid: f07337790f0706e4c858be475929d9aa,
+        type: 3}
+      propertyPath: castPosOffset.y
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f07337790f0706e4c858be475929d9aa, type: 3}

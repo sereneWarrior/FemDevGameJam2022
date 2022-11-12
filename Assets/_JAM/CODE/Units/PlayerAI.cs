@@ -2,23 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Do not check range again if we already check for targets with same or higher range
-/// Target check is not optimized. Its really shitty
-/// Targeting must be inside the Spell because each spell has different target conditions
-/// </summary>
-
 [RequireComponent(typeof(Unit))]
 public class PlayerAI : MonoBehaviour
 {
     [Header("DESIGN")]
+    [Tooltip("The Offset from the Player position from which we cast the Spells")]
     public Vector3 castPosOffset = new Vector3(0,1,0);
+    [Tooltip("The Layer we use for the Enemy Check")]
+    public LayerMask spellLayer;
+    [Tooltip("List that holds all the spells we can currently cast")]
     public List<BaseSpell> spellList = new List<BaseSpell>();
-    public LayerMask targetLayer;
 
     [Header("REFERENCES")]
     private Unit unit;
-    private Unit target;
 
     [Header("REUSABLES")]
     private Vector3 castPos;
@@ -41,11 +37,8 @@ public class PlayerAI : MonoBehaviour
     {
         foreach (BaseSpell spell in spellList)
         {
-            if (CheckIfTargetIsValid(spell))
-            {
-                if (TryToUseSpell(spell))
-                    return;
-            }
+            if (TryToUseSpell(spell))
+                return;
         }
     }
 
@@ -56,59 +49,19 @@ public class PlayerAI : MonoBehaviour
     {
         if (_spell.CheckSpellCooldown())
         {
+            // We get a target for the Spell
+            Unit target = Utilities.GetNearestTargetInRange(transform.position, _spell.modifiedRange, spellLayer);
+
+            // If we did not get a target we return
+            if (target == null)
+                return false;
+
+            // Else we cast the Spell
             castPos = new Vector3(transform.position.x + castPosOffset.x, transform.position.y + castPosOffset.y, transform.position.z + castPosOffset.z);
             _spell.CastSpell(target, castPos);
             return true;
         }
 
         return false;
-    }
-
-    /// <summary>
-    /// We check if the Target is Valid for this spell
-    /// </summary>
-    /// <param name="_spell"></param>
-    /// <returns></returns>
-    private bool CheckIfTargetIsValid(BaseSpell _spell)
-    {
-        if (target == null)
-            TryGetTarget(_spell.modifiedRange);
-
-        if (target == null)
-            return false;
-        else
-        {
-            // If our current Target is outside of our Range
-            if (Vector3.Distance(target.transform.position, transform.position) > _spell.modifiedRange)
-            {
-                RemoveTarget();
-                return false;
-            }
-        }
-
-        // We have a valid Target
-        return true;
-    }
-
-    /// <summary>
-    /// We try to get a new Target
-    /// </summary>
-    private void TryGetTarget(float _targetRange)
-    {
-        Collider[] collider = Physics.OverlapSphere(transform.position, _targetRange, targetLayer);
-        if(collider.Length > 0)
-        {
-            target = collider[0].GetComponent<Unit>();
-            target.onUnitDisable += RemoveTarget;
-        }
-    }
-
-    /// <summary>
-    /// We Remove the Target
-    /// </summary>
-    public void RemoveTarget()
-    {
-        target.onUnitDisable -= RemoveTarget;
-        target = null;
     }
 }
