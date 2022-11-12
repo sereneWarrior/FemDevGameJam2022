@@ -77,7 +77,7 @@ public class ExpHandler : MonoBehaviour
         curExp += _exp;
         UpdateSliderValues();
 
-        if(curExp > maxExp)
+        if(curExp >= maxExp)
             OnLevelUp();
     }
 
