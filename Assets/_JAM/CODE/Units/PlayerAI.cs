@@ -12,12 +12,16 @@ using UnityEngine;
 public class PlayerAI : MonoBehaviour
 {
     [Header("DESIGN")]
+    public Vector3 castPosOffset = new Vector3(0,1,0);
     public List<BaseSpell> spellList = new List<BaseSpell>();
     public LayerMask targetLayer;
 
     [Header("REFERENCES")]
     private Unit unit;
-    public Unit target;
+    private Unit target;
+
+    [Header("REUSABLES")]
+    private Vector3 castPos;
 
     public void Awake()
     {
@@ -52,7 +56,8 @@ public class PlayerAI : MonoBehaviour
     {
         if (_spell.CheckSpellCooldown())
         {
-            _spell.CastSpell(target);
+            castPos = new Vector3(transform.position.x + castPosOffset.x, transform.position.y + castPosOffset.y, transform.position.z + castPosOffset.z);
+            _spell.CastSpell(target, castPos);
             return true;
         }
 
@@ -105,25 +110,5 @@ public class PlayerAI : MonoBehaviour
     {
         target.onUnitDisable -= RemoveTarget;
         target = null;
-    }
-
-    /// <summary>
-    /// We get the nearest Target
-    /// </summary>
-    /// <param name="_collider"></param>
-    private void GetNearestTarget(Collider[] _collider)
-    {
-
-    }
-
-    public void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-
-        foreach (BaseSpell spell in spellList)
-        {
-            if(spell != null)
-                Gizmos.DrawWireSphere(transform.position, spell.modifiedRange);
-        }
     }
 }

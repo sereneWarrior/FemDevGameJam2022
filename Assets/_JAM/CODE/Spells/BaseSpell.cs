@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Spell", menuName = "Gamejam/Create new Spell", order = 0)]
-public class BaseSpell : ScriptableObject
+public abstract class BaseSpell : ScriptableObject
 {
     [Header("DESIGN")]
     [Tooltip("The name of the Spell")]
@@ -33,12 +32,12 @@ public class BaseSpell : ScriptableObject
     }
 
     /// <summary>
-    /// We execute this Spell
+    /// We cast this spell
     /// </summary>
     /// <param name="_target"></param>
-    public virtual void CastSpell(Unit _target)
+    /// <param name="_castPos"></param>
+    public virtual void CastSpell(Unit _target, Vector3 _castPos)
     {
-        _target.GetDamage(modifiedDamage);
         spellCDTimer = modifiedCD;
     }
 

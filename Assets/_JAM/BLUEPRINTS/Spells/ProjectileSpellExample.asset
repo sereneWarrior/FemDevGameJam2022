@@ -9,13 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abc2193fe40efd74387e34fecfeda726, type: 3}
-  m_Name: AutoAttack
+  m_Script: {fileID: 11500000, guid: 350657c3bd917154f9094bf4526d05c2, type: 3}
+  m_Name: ProjectileSpellExample
   m_EditorClassIdentifier: 
-  spellName: AutoAttack
+  spellName: BaseSpell
   damage: 1
-  modifiedDamage: 0
+  modifiedDamage: 1
   cooldown: 0.25
-  modifiedCD: 0
+  modifiedCD: 0.25
   range: 5
-  modifiedRange: 0
+  modifiedRange: 5
+  projectileSpeed: 5
+  modifiedSpeed: 5
+  projectilePrefab: {fileID: 3989755456691343760, guid: c330ac642d25bfc4380eae76a44ff95a,
+    type: 3}
