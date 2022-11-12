@@ -20,8 +20,13 @@ public class PlayerInput : MonoBehaviour
     {
         if (canReadInput)
         {
-            Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            input.Normalize();
+            Vector3 input = Vector3.zero;
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+            {
+                input.x = Input.GetAxis("Horizontal");
+                input.z = Input.GetAxis("Vertical");
+                input.Normalize();
+            }
             if (onPlayerInput != null)
                 onPlayerInput(input);
         }
