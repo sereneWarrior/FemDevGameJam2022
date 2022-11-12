@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     public Action<Vector3> onPlayerInput;
+    public static Action onEscapePressed;
 
     bool canReadInput;
 
@@ -22,6 +23,11 @@ public class PlayerInput : MonoBehaviour
             input.Normalize();
             if (onPlayerInput != null)
                 onPlayerInput(input);
+        }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (onEscapePressed != null)
+                onEscapePressed();
         }
     }
 }
