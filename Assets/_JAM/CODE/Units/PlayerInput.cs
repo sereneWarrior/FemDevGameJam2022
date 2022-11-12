@@ -13,6 +13,7 @@ public class PlayerInput : MonoBehaviour
     private void Awake()
     {
         canReadInput = true;
+        GeneralSettings.onOptionOpen += DisableInput;
     }
 
     private void LateUpdate()
@@ -29,5 +30,15 @@ public class PlayerInput : MonoBehaviour
             if (onEscapePressed != null)
                 onEscapePressed();
         }
+    }
+
+    void DisableInput(bool isOpen)
+    {
+        canReadInput = !isOpen;
+    }
+
+    private void OnDestroy()
+    {
+        GeneralSettings.onOptionOpen -= DisableInput;
     }
 }

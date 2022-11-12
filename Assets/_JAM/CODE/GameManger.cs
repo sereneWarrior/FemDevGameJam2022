@@ -31,4 +31,12 @@ public static class GameManger
         unitList.Remove(_unit);
     }
 
+
+    public static void PauseGame(bool isPaused)
+    {
+        if (isPaused)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
+    }
 }

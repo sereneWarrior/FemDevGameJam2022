@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -19,6 +20,8 @@ public class GeneralSettings : MonoBehaviour
     static bool isFullscreen = false;
     int currentResolution = 1080;
     int savedScreenResolution = 3;
+
+    public static Action<bool> onOptionOpen;
 
     private void Awake()
     {
@@ -155,6 +158,9 @@ public class GeneralSettings : MonoBehaviour
     {
         if (gameObject.activeInHierarchy)
             SaveSettings();
+        if (onOptionOpen != null)
+            onOptionOpen(!gameObject.activeInHierarchy);
+        GameManger.PauseGame(!gameObject.activeInHierarchy);
         gameObject.SetActive(!gameObject.activeInHierarchy);
     }
 
