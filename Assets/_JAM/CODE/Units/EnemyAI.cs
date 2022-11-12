@@ -12,16 +12,44 @@ public class EnemyAI : MonoBehaviour
     private Unit playerUnit;
     private NavMeshAgent agent;
 
+    [Header("ATTACK BEHAVIOUR")]
+    [SerializeField] private float attackDistance = 1.25f;
+    [SerializeField] private float damage = 1;
+    [SerializeField] private float damageCooldown = 1;
+
+    float currentCooldown = 0;
+    private Transform ownTransform;
+    private Transform playerTransform;
+
     public void Awake()
     {
         unit = this.GetComponent<Unit>();
         agent = this.GetComponent<NavMeshAgent>();
+
+        ownTransform = transform;
     }
 
     public void OnEnable()
     {
-        playerUnit = GameManger.playerUnit;
         UnitHealthBarHandler.instance.RequestHealthBar(unit);
+    }
+
+    private void Start()
+    {
+        playerUnit = GameManger.playerUnit;
+        playerTransform = playerUnit.transform;
+        Debug.Log(playerTransform);
+    }
+
+    private void Update()
+    {
+        currentCooldown -= Time.deltaTime;
+        if(playerTransform != null)
+            if(currentCooldown <= 0 && (ownTransform.position - playerTransform.position).sqrMagnitude <= attackDistance * attackDistance)
+            {
+                currentCooldown = damageCooldown;
+                playerUnit.GetDamage(damage);
+            }
     }
 
     private void FixedUpdate()

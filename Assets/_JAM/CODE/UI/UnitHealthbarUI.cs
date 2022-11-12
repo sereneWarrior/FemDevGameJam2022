@@ -74,6 +74,8 @@ public class UnitHealthbarUI : MonoBehaviour
     public void UpdateSlider(float _curHealth)
     {
         mainSliderUI.value = _curHealth;
+        mainSliderRect.rotation = Quaternion.identity;
+        DOTween.Kill(gameObject);
         mainSliderRect.DOPunchRotation(punchRotation, punchDuration);
     }
 
