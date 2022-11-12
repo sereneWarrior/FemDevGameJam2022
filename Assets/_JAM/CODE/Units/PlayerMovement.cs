@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private Transform visuals;
+    [SerializeField] private Animator animator;
     [SerializeField] private float moveSpeed = 10;
     [SerializeField] private float turnSpeed = 250;
 
@@ -29,8 +30,14 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         ownRigidbody.MovePosition(ownRigidbody.position + input * moveSpeed * Time.fixedDeltaTime);
-        if(visuals != null && input.sqrMagnitude > 0.1f)
+        if (visuals != null && input.sqrMagnitude > 0.1f)
+        {
+            if(animator != null)
+                animator.SetBool("walk", true);
             visuals.rotation = Quaternion.RotateTowards(visuals.rotation, Quaternion.LookRotation(input), turnSpeed * Time.deltaTime);
+        }
+        else if (animator != null)
+            animator.SetBool("walk", false);
     }
 
     private void OnDestroy()

@@ -43,14 +43,21 @@ public class EnemyAI : MonoBehaviour
     {
         playerUnit = GameManger.playerUnit;
         playerTransform = playerUnit.transform;
-        Debug.Log(playerTransform);
     }
 
     private void Update()
     {
+        MeleeAttackPattern();
+    }
+
+    /// <summary>
+    /// Determins if the player is near enough to attack and deals damage if so
+    /// </summary>
+    void MeleeAttackPattern()
+    {
         currentCooldown -= Time.deltaTime;
-        if(playerTransform != null)
-            if(currentCooldown <= 0 && (ownTransform.position - playerTransform.position).sqrMagnitude <= attackDistance * attackDistance)
+        if (playerTransform != null)
+            if (currentCooldown <= 0 && (ownTransform.position - playerTransform.position).sqrMagnitude <= attackDistance * attackDistance)
             {
                 currentCooldown = damageCooldown;
                 playerUnit.GetDamage(damage);
