@@ -29,9 +29,14 @@ public class EnemyAI : MonoBehaviour
         ownTransform = transform;
     }
 
-    public void OnEnable()
+    private void OnEnable()
     {
         UnitHealthBarHandler.instance.RequestHealthBar(unit);
+    }
+
+    private void OnDisable()
+    {
+        EnemyHandler.instance.unitsPoolingQueue.Enqueue(unit);
     }
 
     private void Start()

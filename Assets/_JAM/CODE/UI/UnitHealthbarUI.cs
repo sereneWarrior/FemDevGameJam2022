@@ -38,6 +38,9 @@ public class UnitHealthbarUI : MonoBehaviour
         unit = _unit;
         unit.onUnitHealhChanged += UpdateSlider;
         unit.onUnitDisable += DisableBar;
+
+        // We update the Healthbar Pos
+        UpdateHealthBarPos();
     }
 
     /// <summary>
