@@ -7,7 +7,7 @@ using UnityEngine;
 public class ProjectileSpell : BaseSpell
 {
     [Header("PROJECTILE SPELL")]
-    [SerializeField] public float projectileSpeed = 5;
+    [SerializeField] private float projectileSpeed = 5;
     [HideInInspector] public float modifiedSpeed;
     public Projectile projectilePrefab;
 
