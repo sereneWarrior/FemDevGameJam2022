@@ -1134,7 +1134,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  unitPrefab: {fileID: 7053875629008260703, guid: a010835182f62cf429832e340eb91c5c,
+  unitPrefab: {fileID: 7053875629008260703, guid: 1eaf40505386af7419b06016186507a2,
     type: 3}
 --- !u!4 &872125726
 Transform:

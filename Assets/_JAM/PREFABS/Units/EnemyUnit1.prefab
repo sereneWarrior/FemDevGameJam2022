@@ -46,12 +46,12 @@ GameObject:
   - component: {fileID: 9017321531511147346}
   - component: {fileID: 5958496052555753057}
   m_Layer: 6
-  m_Name: EnemyUnitNew
+  m_Name: EnemyUnit1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3333104062541917365
 Transform:
   m_ObjectHideFlags: 0
@@ -147,17 +147,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d070d0edba5ada748968fd60a2198b0b,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d070d0edba5ada748968fd60a2198b0b,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d070d0edba5ada748968fd60a2198b0b,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d070d0edba5ada748968fd60a2198b0b,
         type: 3}
@@ -167,7 +167,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d070d0edba5ada748968fd60a2198b0b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.82
+      value: 1.14
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d070d0edba5ada748968fd60a2198b0b,
         type: 3}
