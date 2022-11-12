@@ -154,7 +154,7 @@ public class GeneralSettings : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    void OpenCloseWindow()
+    public void OpenCloseWindow()
     {
         if (gameObject.activeInHierarchy)
             SaveSettings();
