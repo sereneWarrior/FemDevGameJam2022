@@ -78,6 +78,7 @@ public class GeneralSettings : MonoBehaviour
         if (musicPercentage != null)
             musicPercentage.text = Mathf.RoundToInt(musicSlider.value).ToString() + "%";
 
+        GameManger.PauseGame(false);
         gameObject.SetActive(false);
     }
 
