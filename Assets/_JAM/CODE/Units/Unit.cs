@@ -28,6 +28,8 @@ public class Unit : MonoBehaviour, IDamagable
     {
         if (onUnitDisable != null)
             onUnitDisable();
+
+        GameManger.RemoveUnit(this);
     }
 
     private void SetupUnit()
@@ -55,11 +57,15 @@ public class Unit : MonoBehaviour, IDamagable
     /// </summary>
     public void Die()
     {
+        // We change the Health
         curHealth = 0;
 
+        // We send the Events
         if (onUnitDeath != null)
             onUnitDeath();
+        GameManger.SendUnitDeathEvent(this);
 
+        // We deactivate this Object
         this.gameObject.SetActive(false);
     }
 }
