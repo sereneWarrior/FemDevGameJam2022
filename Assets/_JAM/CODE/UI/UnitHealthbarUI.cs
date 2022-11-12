@@ -12,7 +12,7 @@ public class UnitHealthbarUI : MonoBehaviour
     [Tooltip("Can be used to offset the position of the Healthbar")]
     public Vector3 offset;
     [Tooltip("Time that has to pass in order to activate the Tween of the slider values")]
-    public float sliderTweenWaitTime = 2f;
+    public float sliderTweenWaitTime = 1.5f;
     [Tooltip("Time that the tweening of the values takes")]
     public float sliderTweenValueTime = 1f;
 
@@ -31,7 +31,7 @@ public class UnitHealthbarUI : MonoBehaviour
 
     private void Awake()
     {
-        ownRectTransform = gameObject.GetComponent<RectTransform>();
+        ownRectTransform = GetComponent<RectTransform>();
         camMain = Camera.main;
     }
 
@@ -85,6 +85,9 @@ public class UnitHealthbarUI : MonoBehaviour
         transform.position = camMain.WorldToScreenPoint(unit.transform.position + offset);
     }
 
+    /// <summary>
+    /// Checks if enough time passed to tween the delay slider to the main slider value
+    /// </summary>
     void CheckForSliderTween()
     {
         if(!hasTweenedSlider && Time.time - lastHitTime > sliderTweenWaitTime)
@@ -93,7 +96,7 @@ public class UnitHealthbarUI : MonoBehaviour
             DOTween.Kill(ownRectTransform);
             ownRectTransform.rotation = Quaternion.identity;
             ownRectTransform.localScale = Vector3.one;
-            ownRectTransform.DOShakeScale(0.5f, 0.5f);
+            ownRectTransform.DOPunchScale(Vector3.one * 1.1f, 0.25f, 1).OnComplete(() =>ownRectTransform.localScale = Vector3.one);
             delayedSliderUI.DOFillAmount(mainSliderUI.fillAmount, sliderTweenValueTime);
         }
     }
@@ -107,6 +110,7 @@ public class UnitHealthbarUI : MonoBehaviour
         mainSliderUI.fillAmount = Utils.ConvertRange(0, unit.maxHealth, 0, 1, _curHealth);
         DOTween.Kill(ownRectTransform);
         ownRectTransform.rotation = Quaternion.identity;
+        ownRectTransform.localScale = Vector3.one;
         ownRectTransform.DOPunchRotation(punchRotation, punchDuration);
         lastHitTime = Time.time;
         hasTweenedSlider = false;
