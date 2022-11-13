@@ -1,10 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using DG.Tweening;
 
-public class LevelUpCardUI : MonoBehaviour
+public class SpellUpgradeCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    [Header("DESIGN")]
+    public Color baseColor;
+    public Color highlightColor;
+    public float shakeDuration = 0.2f;
+    public float shakeStrength = 0.1f;
+
+    [Header("DATA")]
+    public bool isInteractable = false;
+
     [Header("UI REFERENCES")]
     public TMP_Text nameDisplay;
     public TMP_Text levelDisplay;
@@ -14,7 +24,9 @@ public class LevelUpCardUI : MonoBehaviour
     public TMP_Text splashDisplay;
 
     [Header("REFERENCES")]
+    public Image imageRenderer;
     private SpellCaster caster;
+    private int containerID;
 
     /// <summary>
     /// We Setup this Card
@@ -27,6 +39,10 @@ public class LevelUpCardUI : MonoBehaviour
         int spellLevel = _caster.spellList[_containerID].level;
         BaseSpell spellReference = _caster.spellList[_containerID].spellReference;
         caster = _caster;
+        containerID = _containerID;
+
+        // We reset some Stuff
+        ToggleHighlight(false);
 
         // We set the base display Data
         nameDisplay.text = spellReference.name;
@@ -41,7 +57,7 @@ public class LevelUpCardUI : MonoBehaviour
             return;
 
         // We display the Upgrade Stats
-        levelDisplay.text = spellLevel + " => <color=#1C8E40>" + spellLevel + 1;
+        levelDisplay.text = spellLevel + " => <color=#1C8E40>" + (spellLevel + 1);
         damageDisplay.text += " => <color=#1C8E40>" + spellReference.leveledSpellStats[spellLevel + 1].damage;
         cooldownDisplay.text += " => <color=#1C8E40>" + spellReference.leveledSpellStats[spellLevel + 1].cooldown;
         rangeDisplay.text += " => <color=#1C8E40>" + spellReference.leveledSpellStats[spellLevel + 1].range;
@@ -49,11 +65,60 @@ public class LevelUpCardUI : MonoBehaviour
     }
 
     /// <summary>
-    /// We Toggle the Collider of this Card
+    /// We toggle the interactivity of this Card
     /// </summary>
     /// <param name="_isActive"></param>
-    public void ToggleCollider(bool _isActive)
+    public void ToggleInteractivity(bool _isActive)
     {
+        isInteractable = _isActive;
+    }
 
+    /// <summary>
+    /// We toggle the Highlight of this Card
+    /// </summary>
+    /// <param name="_isActive"></param>
+    public void ToggleHighlight(bool _isActive)
+    {
+        if(_isActive)
+        {
+            transform.DOShakePosition(shakeDuration, shakeStrength);
+            imageRenderer.color = highlightColor;
+        }
+        else
+            imageRenderer.color = baseColor;
+    }
+
+    /// <summary>
+    /// Implementation of Unitys OnPointerEnter
+    /// </summary>
+    /// <param name="eventData"></param>
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (!isInteractable)
+            return;
+
+        ToggleHighlight(true);
+    }
+
+    /// <summary>
+    /// Implementation of Unitys OnPointerExit
+    /// </summary>
+    /// <param name="eventData"></param>
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (!isInteractable)
+            return;
+
+        ToggleHighlight(false);
+    }
+
+    /// <summary>
+    /// Implementation of Unitys OnPointerClick
+    /// </summary>
+    /// <param name="eventData"></param>
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!isInteractable)
+            return;
     }
 }

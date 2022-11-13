@@ -10,10 +10,10 @@ public class CardUIHandler : MonoBehaviour
     public Ease moveEase;
 
     [Header("DATA")]
-    private LevelUpCardUI[] spawnedCards = new LevelUpCardUI[3];
+    private SpellUpgradeCardUI[] spawnedCards = new SpellUpgradeCardUI[3];
 
     [Header("REFERENCES")]
-    public LevelUpCardUI levelUpCardPrefab;
+    public SpellUpgradeCardUI levelUpCardPrefab;
     public RectTransform cardSpawnRect;
     public RectTransform[] cardTargetPos;
 
@@ -75,7 +75,7 @@ public class CardUIHandler : MonoBehaviour
         for (int i = 0; i < spawnedCards.Length; i++)
         {
             showSequence.Append(spawnedCards[i].transform.DOMove(cardSpawnRect.position, cardSlideDuration));
-            spawnedCards[i].ToggleCollider(false);
+            spawnedCards[i].ToggleInteractivity(false);
         }
 
         showSequence.Play();
@@ -88,7 +88,7 @@ public class CardUIHandler : MonoBehaviour
     {
         for (int i = 0; i < spawnedCards.Length; i++)
         {
-            spawnedCards[i].ToggleCollider(true);
+            spawnedCards[i].ToggleInteractivity(true);
         }
     }
 }

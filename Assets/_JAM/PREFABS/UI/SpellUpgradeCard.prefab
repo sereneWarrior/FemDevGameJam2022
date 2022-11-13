@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2311419332124135286}
   - component: {fileID: 5031984854318333679}
   m_Layer: 5
-  m_Name: LevelUpCardUI
+  m_Name: SpellUpgradeCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,12 +95,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b7171d2de0e0bc4393370d71721131e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseColor: {r: 0.754717, g: 0.754717, b: 0.754717, a: 1}
+  highlightColor: {r: 1, g: 1, b: 1, a: 1}
+  shakeDuration: 0.3
+  shakeStrength: 15
+  isInteractable: 0
   nameDisplay: {fileID: 7564121466886519457}
   levelDisplay: {fileID: 8257801755092641332}
   damageDisplay: {fileID: 5892403090156432253}
   cooldownDisplay: {fileID: 3418101305019718924}
   rangeDisplay: {fileID: 3723896259666759137}
   splashDisplay: {fileID: 7169086007005515682}
+  imageRenderer: {fileID: 5970368796092356577}
 --- !u!114 &5031984854318333679
 MonoBehaviour:
   m_ObjectHideFlags: 0
