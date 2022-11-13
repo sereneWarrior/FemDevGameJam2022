@@ -58,6 +58,8 @@ public class SpellUpgradeCardUI : MonoBehaviour, IPointerEnterHandler, IPointerE
         if (!_caster.spellList[_containerID].learned)
             return;
 
+        Debug.Log(spellLevel);
+
         // We display the Upgrade Stats
         nameDisplay.text = spellReference.spellName;
         levelDisplay.text = spellLevel + " => <color=#1C8E40>" + (spellLevel + 1);

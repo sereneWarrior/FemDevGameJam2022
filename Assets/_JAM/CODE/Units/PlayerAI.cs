@@ -41,7 +41,7 @@ public class PlayerAI : MonoBehaviour
         // We get all spells that are currently upgradable
         for (int x = 0; x < spellCaster.spellList.Count; x++)
         {
-            if (spellCaster.spellList[x].level < spellCaster.spellList[x].spellReference.leveledSpellStats.Count)
+            if (spellCaster.spellList[x].level < spellCaster.spellList[x].spellReference.leveledSpellStats.Count - 1)
                 possibleUpgrades.Add(x);
         }
 
