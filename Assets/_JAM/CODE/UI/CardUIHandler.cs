@@ -13,6 +13,7 @@ public class CardUIHandler : MonoBehaviour
     private SpellUpgradeCardUI[] spawnedCards = new SpellUpgradeCardUI[3];
 
     [Header("REFERENCES")]
+    public GameObject background;
     public SpellUpgradeCardUI levelUpCardPrefab;
     public RectTransform cardSpawnRect;
     public RectTransform[] cardTargetPos;
@@ -23,6 +24,7 @@ public class CardUIHandler : MonoBehaviour
     {
         instance = this;
         InitiateCards();
+        DisableBackground();
     }
 
     /// <summary>
@@ -45,6 +47,7 @@ public class CardUIHandler : MonoBehaviour
         DOTween.Kill(gameObject);
         Sequence showSequence = DOTween.Sequence();
         GameManger.SendPauseGameEvent();
+        EnableBackground();
 
         for (int i = 0; i < spawnedCards.Length; i++)
         {
@@ -79,6 +82,7 @@ public class CardUIHandler : MonoBehaviour
             spawnedCards[i].ToggleHighlight(false);
         }
 
+        hideSequence.AppendCallback(DisableBackground);
         hideSequence.AppendCallback(GameManger.SendUnpauseGameEvent);
         hideSequence.Play();
     }
@@ -92,5 +96,21 @@ public class CardUIHandler : MonoBehaviour
         {
             spawnedCards[i].ToggleInteractivity(true);
         }
+    }
+
+    /// <summary>
+    /// We enable the Background
+    /// </summary>
+    private void EnableBackground()
+    {
+        background.SetActive(true);
+    }
+
+    /// <summary>
+    /// We disable the Background
+    /// </summary>
+    private void DisableBackground()
+    {
+        background.SetActive(false);
     }
 }

@@ -23,12 +23,23 @@ public class ProjectileSpell : BaseSpell
     /// <summary>
     /// We cast this spell
     /// </summary>
-    /// <param name="_target"></param>
     /// <param name="_castPos"></param>
     /// <param name="_spellLevel"></param>
-    public override void CastSpell(Unit _target, Vector3 _castPos, int _spellLevel)
+    public override void CastSpell(Vector3 _castPos, int _spellLevel)
     {
-        Instantiate(projectilePrefab, _castPos, Quaternion.identity).SetupProjectile(_target, leveledSpellStats[_spellLevel].damage, projectileSpeed, leveledSpellStats[_spellLevel].splashRadius);
-        base.CastSpell(_target, _castPos, _spellLevel);
+        // We create the container
+        Unit tempTarget;
+        Vector3 castPos = _castPos;
+
+        // We try to get a new Target
+        tempTarget = null;
+        tempTarget = Utilities.GetEnemiesInRange(castPos, leveledSpellStats[_spellLevel].range);
+
+        // If we got no target we return
+        if (tempTarget == null)
+            return;
+
+        Instantiate(projectilePrefab, _castPos, Quaternion.identity).SetupProjectile(tempTarget, projectileSpeed, leveledSpellStats[_spellLevel]);
+        base.CastSpell(_castPos, _spellLevel);
     }
 }

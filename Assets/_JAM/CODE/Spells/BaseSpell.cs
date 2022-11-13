@@ -16,10 +16,9 @@ public abstract class BaseSpell : ScriptableObject
     /// <summary>
     /// We cast this spell
     /// </summary>
-    /// <param name="_target"></param>
     /// <param name="_castPos"></param>
     /// <param name="_spellLevel"></param>
-    public virtual void CastSpell(Unit _target, Vector3 _castPos, int _spellLevel)
+    public virtual void CastSpell(Vector3 _castPos, int _spellLevel)
     {
         spellCDTimer = leveledSpellStats[_spellLevel].cooldown;
     }
@@ -51,6 +50,8 @@ public class SpellStats
     public float range = 5;
     [Tooltip("If we hit other enemies beside the Target in range")]
     public float splashRadius = 0;
+    [Tooltip("If this value is bigger than 0 this spell bounces")]
+    public float bounce = 0;
 }
 
 

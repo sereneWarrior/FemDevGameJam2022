@@ -11,12 +11,10 @@ public class SpellProjectile : MonoBehaviour, IPausable
 
     [Header("DATA")]
     public bool isPaused = false;
-    [Tooltip("How much damage this Projectile makes")]
-    private float damage;
     [Tooltip("Speed of the Projectile")]
     private float speed;
-    [Tooltip("The Splash radius of this Projectile")]
-    private float splashRadius;
+    [Tooltip("SpellData of the Projectile Spell")]
+    private SpellStats spellStats;
 
     [Header("SPLASH VFX")]
     [Tooltip("Offset spawn position in relation to our Target")]
@@ -42,16 +40,15 @@ public class SpellProjectile : MonoBehaviour, IPausable
     /// <summary>
     /// We Setup the Projectile
     /// </summary>
-    /// <param name="_unit"></param>
-    /// <param name="_damage"></param>
+    /// <param name="_target"></param>
     /// <param name="_speed"></param>
-    /// <param name="_splashRadius"></param>
-    public void SetupProjectile(Unit _unit, float _damage, float _speed, float _splashRadius = 0)
+    /// <param name="_spellStats"></param>
+    public void SetupProjectile(Unit _target, float _speed, SpellStats _spellStats)
     {
-        targetUnit = _unit;
-        damage = _damage;
+        targetUnit = _target;
         speed = _speed;
-        splashRadius = _splashRadius;
+        spellStats = _spellStats;
+
         targetUnit.onUnitDisable += DisableProjectile;
     }
 
@@ -81,7 +78,6 @@ public class SpellProjectile : MonoBehaviour, IPausable
         if (Vector3.Distance(transform.position, targetUnit.transform.position) <= targetReachedTreshold)
         {
             MakeDamage();
-            DisableProjectile();
         }
     }
 
@@ -90,11 +86,11 @@ public class SpellProjectile : MonoBehaviour, IPausable
     /// </summary>
     public void MakeDamage()
     {
-        if (splashRadius == 0)
-            targetUnit.GetDamage(damage);
+        if (spellStats.splashRadius == 0)
+            targetUnit.GetDamage(spellStats.damage);
         else
         {
-            Utilities.DamageAllInRange(targetUnit.transform.position, splashRadius, damage, GameManger.enemyLayer);
+            Utilities.DamageAllInRange(targetUnit.transform.position, spellStats.splashRadius, spellStats.damage, GameManger.enemyLayer);
             OnSplashDamage();
         }
 
@@ -117,8 +113,20 @@ public class SpellProjectile : MonoBehaviour, IPausable
     /// </summary>
     private void DisableProjectile()
     {
-        targetUnit.onUnitDisable -= DisableProjectile;
+        LooseTarget();
         Destroy(this.gameObject); // Later we need to add pooling
+    }
+
+    /// <summary>
+    /// We loose our Target
+    /// </summary>
+    private void LooseTarget()
+    {
+        if (targetUnit)
+        {
+            targetUnit.onUnitDisable -= DisableProjectile;
+            targetUnit = null;
+        }
     }
 
     /// <summary>

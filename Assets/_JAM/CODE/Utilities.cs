@@ -13,14 +13,14 @@ public static class Utilities
     /// <param name="_range"></param>
     /// <param name="_layerMask"></param>
     /// <returns></returns>
-    public static Unit GetNearestTargetInRange(Vector3 _startPos, float _range, LayerMask _layerMask)
+    public static Unit GetEnemiesInRange(Vector3 _startPos, float _range)
     {
         // We create the Container we neeed
         float distance = Mathf.Infinity;
         Unit nearestUnit = null;
 
         // We get the Collider
-        Collider[] collider = Physics.OverlapSphere(_startPos, _range, _layerMask);
+        Collider[] collider = Physics.OverlapSphere(_startPos, _range, GameManger.enemyLayer);
 
         // We go trough each collider and get the closest
         foreach (Collider enemy in collider)

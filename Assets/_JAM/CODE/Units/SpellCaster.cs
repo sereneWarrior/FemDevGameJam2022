@@ -54,16 +54,8 @@ public class SpellCaster : MonoBehaviour, IPausable
     {
         if (_spell.CheckSpellCooldown())
         {
-            // We get a target for the Spell
-            Unit target = Utilities.GetNearestTargetInRange(transform.position, _spell.leveledSpellStats[_spellLevel].range, GameManger.enemyLayer);
-
-            // If we did not get a target we return
-            if (target == null)
-                return false;
-
-            // Else we cast the Spell
             castPos = new Vector3(transform.position.x + castPosOffset.x, transform.position.y + castPosOffset.y, transform.position.z + castPosOffset.z);
-            _spell.CastSpell(target, castPos, _spellLevel);
+            _spell.CastSpell(castPos, _spellLevel);
             return true;
         }
 
