@@ -48,7 +48,7 @@ public class SpellUpgradeCardUI : MonoBehaviour, IPointerEnterHandler, IPointerE
         ToggleHighlight(false);
 
         // We set the base display Data
-        nameDisplay.text = "<color=#1C8E40>" + spellReference.name;
+        nameDisplay.text = "<color=#1C8E40>" + spellReference.spellName;
         levelDisplay.text = spellLevel.ToString();
         damageDisplay.text = spellReference.leveledSpellStats[spellLevel].damage.ToString();
         cooldownDisplay.text = spellReference.leveledSpellStats[spellLevel].cooldown.ToString();
@@ -60,7 +60,7 @@ public class SpellUpgradeCardUI : MonoBehaviour, IPointerEnterHandler, IPointerE
             return;
 
         // We display the Upgrade Stats
-        nameDisplay.text = spellReference.name;
+        nameDisplay.text = spellReference.spellName;
         levelDisplay.text = spellLevel + " => <color=#1C8E40>" + (spellLevel + 1);
         damageDisplay.text += " => <color=#1C8E40>" + spellReference.leveledSpellStats[spellLevel + 1].damage;
         cooldownDisplay.text += " => <color=#1C8E40>" + spellReference.leveledSpellStats[spellLevel + 1].cooldown;
