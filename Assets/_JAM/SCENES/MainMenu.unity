@@ -1648,6 +1648,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2445133070763952411, guid: b83021a2d50a0aa4ea9cddd63239871f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Game
+      objectReference: {fileID: 0}
     - target: {fileID: 2561685497274102568, guid: b83021a2d50a0aa4ea9cddd63239871f,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
