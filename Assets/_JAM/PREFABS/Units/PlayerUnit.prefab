@@ -183,6 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curHealth: 0
   maxHealth: 10
+  myCollider: {fileID: 0}
 --- !u!114 &7321243365154092836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +204,9 @@ MonoBehaviour:
   - learned: 0
     level: 0
     spellReference: {fileID: 11400000, guid: 4e334ff66b6d1c645992a1eaa0122903, type: 2}
+  - learned: 0
+    level: 0
+    spellReference: {fileID: 11400000, guid: 4277c0765e675b14386ac2dc9e142d96, type: 2}
   isPaused: 0
 --- !u!114 &8599991636797290070
 MonoBehaviour:

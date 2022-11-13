@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64656021e086d1547b7be8520ba16e4c, type: 3}
+  m_Name: ExplosionSpell
+  m_EditorClassIdentifier: 
+  spellName: Pentacle
+  leveledSpellStats:
+  - damage: 3
+    cooldown: 5
+    range: 1
+    splashRadius: 5
+    bounce: 0
+  - damage: 3
+    cooldown: 4
+    range: 1
+    splashRadius: 5
+    bounce: 0
+  - damage: 3
+    cooldown: 3
+    range: 1
+    splashRadius: 5
+    bounce: 0
+  - damage: 3
+    cooldown: 2
+    range: 1
+    splashRadius: 5
+    bounce: 0
+  - damage: 3
+    cooldown: 1
+    range: 1
+    splashRadius: 5
+    bounce: 0
+  spellCDTimer: 1.9404768
+  yPos: 0.1
+  explosionVFX: {fileID: 3252401709800588622, guid: 14d59e8daa5fe79418cb86cb8f2adf7a,
+    type: 3}
