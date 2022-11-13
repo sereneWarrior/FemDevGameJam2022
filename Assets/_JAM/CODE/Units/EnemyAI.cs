@@ -36,6 +36,8 @@ public class EnemyAI : MonoBehaviour, IPausable
         UnitHealthBarHandler.instance.RequestHealthBar(unit, false);
         GameManger.onPauseGame += PauseCode;
         GameManger.onUnpauseGame += UnpauseCode;
+
+        isPaused = false;
     }
 
     private void OnDisable()
