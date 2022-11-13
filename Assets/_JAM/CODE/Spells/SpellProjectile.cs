@@ -141,8 +141,15 @@ public class SpellProjectile : MonoBehaviour, IPausable
     {
         MakeSplashDamage();
         LooseTarget();
-        if(gameObject != null)
-            gameObject.SetActive(false);
+        try
+        {
+            if (gameObject != null)
+                gameObject.SetActive(false);
+        }
+        catch
+        {
+
+        }
     }
 
     /// <summary>

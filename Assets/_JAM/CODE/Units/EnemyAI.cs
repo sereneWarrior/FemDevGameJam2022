@@ -42,7 +42,7 @@ public class EnemyAI : MonoBehaviour, IPausable
     {
         EnemyHandler.instance.unitsPoolingQueue.Enqueue(unit);
         GameManger.onPauseGame -= PauseCode;
-        GameManger.onUnpauseGame += UnpauseCode;
+        GameManger.onUnpauseGame -= UnpauseCode;
     }
 
     private void Start()
