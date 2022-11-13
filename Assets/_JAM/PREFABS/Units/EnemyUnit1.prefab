@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 9017321531511147345}
   - component: {fileID: 9017321531511147346}
   - component: {fileID: 5958496052555753057}
+  - component: {fileID: 5180126295386400732}
   m_Layer: 6
   m_Name: EnemyUnit1
   m_TagString: Untagged
@@ -151,6 +152,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &5180126295386400732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7053875629008260703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2aff0c4b0b14742953408c97a474c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unit: {fileID: 9017321531511147345}
+  deathVFX: {fileID: 1963794456310454, guid: da420a91596617b4ab0f8941677b52e2, type: 3}
 --- !u!1001 &1440544247065686190
 PrefabInstance:
   m_ObjectHideFlags: 0
