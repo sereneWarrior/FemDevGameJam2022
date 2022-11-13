@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/_JAM/SCENES/MainMenu.unity
     guid: f28a3677793051c42aafa6c7771b33c6
   - enabled: 1
     path: Assets/_JAM/SCENES/MTR_DEBUG.unity
     guid: 6a4c8e45ddd3902488b082796a8e281b
+  - enabled: 1
+    path: Assets/_JAM/SCENES/Sarah_Playground.unity
+    guid: 941b32712c3f2854685737fdf8a6822a
   m_configObjects: {}

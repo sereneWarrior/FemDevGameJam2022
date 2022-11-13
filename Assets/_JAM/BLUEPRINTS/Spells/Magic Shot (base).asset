@@ -10,30 +10,35 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 350657c3bd917154f9094bf4526d05c2, type: 3}
-  m_Name: ProjectileSpellExample
+  m_Name: Magic Shot (base)
   m_EditorClassIdentifier: 
-  spellName: BaseSpell
+  spellName: Magic Shot
   leveledSpellStats:
   - damage: 1
     cooldown: 0.25
     range: 5
     splashRadius: 0
-  - damage: 1
+    bounce: 0
+  - damage: 2
     cooldown: 0.25
     range: 5
     splashRadius: 0
-  - damage: 1
+    bounce: 0
+  - damage: 3
     cooldown: 0.25
     range: 5
     splashRadius: 0
-  - damage: 1
+    bounce: 0
+  - damage: 4
     cooldown: 0.25
     range: 5
     splashRadius: 0
-  - damage: 1
+    bounce: 0
+  - damage: 5
     cooldown: 0.25
     range: 5
     splashRadius: 0
+    bounce: 0
   projectileSpeed: 7
   projectilePrefab: {fileID: 3989755456691343760, guid: c330ac642d25bfc4380eae76a44ff95a,
     type: 3}
