@@ -107,7 +107,7 @@ public class SpellProjectile : MonoBehaviour, IPausable
     /// </summary>
     private void OnSplashDamage()
     {
-        if (splashVFX == null)
+        if (splashVFX == null || targetUnit == null)
             return;
 
         Vector3 splashPos = new Vector3(targetUnit.transform.position.x + spawnOffset.x, targetUnit.transform.position.y + spawnOffset.y, targetUnit.transform.position.z + spawnOffset.z);
