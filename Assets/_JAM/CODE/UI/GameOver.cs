@@ -26,6 +26,16 @@ public class GameOver : MonoBehaviour
         float timer = RunTimer.instance.timer;
         float minutes = Mathf.Floor(timer / 60);
         float seconds = Mathf.RoundToInt(timer % 60);
+        string minutesString = minutes.ToString();
+        string secondsString = seconds.ToString();
+        if (minutes < 10)
+        {
+            minutesString = "0" + minutes.ToString();
+        }
+        if (seconds < 10)
+        {
+            secondsString = "0" + Mathf.RoundToInt(seconds).ToString();
+        }
         timeText.text = minutes.ToString() + ":" + seconds.ToString();
     }
 

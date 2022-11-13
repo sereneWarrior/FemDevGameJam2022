@@ -39,7 +39,17 @@ public class RunTimer : MonoBehaviour, IPausable
         timer += Time.deltaTime;
         float minutes = Mathf.Floor(timer / 60);
         float seconds = Mathf.RoundToInt(timer % 60);
-        timerDisplay.text = minutes.ToString() + ":" + seconds.ToString();
+        string minutesString = minutes.ToString();
+        string secondsString = seconds.ToString();
+        if (minutes < 10)
+        {
+            minutesString = "0" + minutes.ToString();
+        }
+        if (seconds < 10)
+        {
+            secondsString = "0" + Mathf.RoundToInt(seconds).ToString();
+        }
+        timerDisplay.text = minutesString + ":" + secondsString;
     }
 
     public void PauseCode()
