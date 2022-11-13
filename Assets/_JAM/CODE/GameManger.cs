@@ -56,6 +56,16 @@ public static class GameManger
     }
 
     /// <summary>
+    /// We send the Unit Spawn Event
+    /// </summary>
+    /// <param name="_unit"></param>
+    public static void SendUnitSpawnEvent(Unit _unit)
+    {
+        if (onUnitSpawn != null)
+            onUnitSpawn(_unit);
+    }
+
+    /// <summary>
     /// We send the Unit Death Event
     /// </summary>
     /// <param name="_unit"></param>

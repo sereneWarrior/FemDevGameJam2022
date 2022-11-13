@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyHandler : MonoBehaviour, IPausable
 {
     [Header("DESIGN")]
+    [Tooltip("How many enemies can be on the screen at the same time")]
+    public int maxEnemies = 200;
     [Tooltip("Size of the Spawn Area")]
     public Rect spawnArea;
     [Tooltip("The Progress we make on the Spawncurve timelime each Frame")]
@@ -16,6 +18,7 @@ public class EnemyHandler : MonoBehaviour, IPausable
     public bool isPaused = false;
     private float spawnCurvePos;
     private float spawnTimer;
+    private int unitCount = 0;
     public Queue<Unit> unitsPoolingQueue = new Queue<Unit>();
 
     [Header("REFERENCES")]
@@ -32,12 +35,16 @@ public class EnemyHandler : MonoBehaviour, IPausable
     {
         GameManger.onPauseGame += PauseCode;
         GameManger.onUnpauseGame += UnpauseCode;
+        GameManger.onUnitSpawn += OnUnitSpawn;
+        GameManger.onUnitDeath += OnUnitDeath;
     }
 
     private void OnDisable()
     {
         GameManger.onPauseGame -= PauseCode;
         GameManger.onUnpauseGame -= UnpauseCode;
+        GameManger.onUnitSpawn -= OnUnitSpawn;
+        GameManger.onUnitDeath -= OnUnitDeath;
     }
 
     /// <summary>
@@ -100,9 +107,14 @@ public class EnemyHandler : MonoBehaviour, IPausable
     /// </summary>
     private void CheckTimer()
     {
+        // We check the unit count
+        if (unitCount >= maxEnemies)
+            return;
+
+        // We run the Spawn Timer
         if (spawnTimer <= 0)
         {
-            SpawnUnit(new Vector3(Random.Range(spawnArea.x, spawnArea.width), 0, Random.Range(spawnArea.y, spawnArea.height)));
+            GameManger.SendUnitSpawnEvent(SpawnUnit(new Vector3(Random.Range(spawnArea.x, spawnArea.width), 0, Random.Range(spawnArea.y, spawnArea.height))));
             spawnTimer = spawnCdCurve.Evaluate(spawnCurvePos);
         }
         else
@@ -123,5 +135,23 @@ public class EnemyHandler : MonoBehaviour, IPausable
     public void UnpauseCode()
     {
         isPaused = false;
+    }
+
+    /// <summary>
+    /// Gets called when a unit spawns
+    /// </summary>
+    /// <param name="_unit"></param>
+    private void OnUnitSpawn(Unit _unit)
+    {
+        unitCount++;
+    }
+
+    /// <summary>
+    /// Gets called when a unit dies
+    /// </summary>
+    /// <param name="_unit"></param>
+    private void OnUnitDeath(Unit _unit)
+    {
+        unitCount--;
     }
 }
