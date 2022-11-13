@@ -120,7 +120,8 @@ public class SpellProjectile : MonoBehaviour, IPausable
     private void DisableProjectile()
     {
         LooseTarget();
-        gameObject.SetActive(false);
+        if(gameObject != null)
+            gameObject.SetActive(false);
     }
 
     /// <summary>
