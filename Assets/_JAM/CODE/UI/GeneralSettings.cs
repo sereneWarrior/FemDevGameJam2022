@@ -41,7 +41,7 @@ public class GeneralSettings : MonoBehaviour
         if(AudioManager.instance != null)
             AudioManager.instance.Play("BG");
 
-
+        /*
         //Loading Screen Settings
         if (PlayerPrefs.HasKey("ScreenResolution"))
         {
@@ -54,7 +54,7 @@ public class GeneralSettings : MonoBehaviour
                 Screen.SetResolution(Mathf.RoundToInt((float)currentResolution * screenRatio), currentResolution, isFullscreen);
             }
         }
-
+        */
         if (PlayerPrefs.HasKey("Fullscreen"))
         {
             int tempFullscreen = PlayerPrefs.GetInt("Fullscreen");
@@ -82,7 +82,7 @@ public class GeneralSettings : MonoBehaviour
             musicPercentage.text = Mathf.RoundToInt(musicSlider.value).ToString() + "%";
         gameObject.SetActive(false);
     }
-
+/*
     public void SetResolution(float newScreenResolution)
     {
         savedScreenResolution = Mathf.RoundToInt(newScreenResolution);
@@ -109,7 +109,7 @@ public class GeneralSettings : MonoBehaviour
         resolutionText.text = currentResolution.ToString() + "p";
         PlayerPrefs.SetInt("ScreenResolution", savedScreenResolution);
     }
-
+*/
     public void SetFullscreen(bool newIsFullscreen)
     {
         isFullscreen = newIsFullscreen;

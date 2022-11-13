@@ -70,3 +70,5 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+Assets/_JAM/IMAGES/Screen_gameover.png.meta
+Assets/_JAM/IMAGES/Screen_opening.jpg.meta
