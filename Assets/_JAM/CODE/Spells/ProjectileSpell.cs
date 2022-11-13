@@ -7,18 +7,10 @@ using UnityEngine;
 public class ProjectileSpell : BaseSpell
 {
     [Header("PROJECTILE SPELL")]
+    [Tooltip("ID of the Prefab we use from the Projectile Handler")]
+    public int projectilePrefabID;
     [Tooltip("Speed of the Projectile we shoot")]
     public float projectileSpeed = 5;
-    public SpellProjectile projectilePrefab;
-
-    /// <summary>
-    /// We Setup this Spell
-    /// </summary>
-    public void SetupSpell()
-    {
-        if (projectilePrefab == null)
-            Debug.LogError("ProjectileSpell: We did not reference the Projectile!");
-    }
 
     /// <summary>
     /// We cast this spell
@@ -39,7 +31,7 @@ public class ProjectileSpell : BaseSpell
         if (tempTarget == null)
             return;
 
-        Instantiate(projectilePrefab, _castPos, Quaternion.identity).SetupProjectile(tempTarget, projectileSpeed, leveledSpellStats[_spellLevel]);
+        SpellProjectileHandler.instance.RequestSpellProjectile(projectilePrefabID, _castPos, tempTarget, projectileSpeed, leveledSpellStats[_spellLevel]);
         base.CastSpell(_castPos, _spellLevel);
     }
 }

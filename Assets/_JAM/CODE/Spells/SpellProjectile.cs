@@ -15,6 +15,7 @@ public class SpellProjectile : MonoBehaviour, IPausable
     private float speed;
     [Tooltip("SpellData of the Projectile Spell")]
     private SpellStats spellStats;
+    private int projectileID;
 
     [Header("SPLASH VFX")]
     [Tooltip("Offset spawn position in relation to our Target")]
@@ -35,6 +36,7 @@ public class SpellProjectile : MonoBehaviour, IPausable
     {
         GameManger.onPauseGame -= PauseCode;
         GameManger.onUnpauseGame -= UnpauseCode;
+        SpellProjectileHandler.instance.spellProjectilePoolList[projectileID].poolingQueue.Enqueue(this);
     }
 
     /// <summary>
@@ -43,11 +45,15 @@ public class SpellProjectile : MonoBehaviour, IPausable
     /// <param name="_target"></param>
     /// <param name="_speed"></param>
     /// <param name="_spellStats"></param>
-    public void SetupProjectile(Unit _target, float _speed, SpellStats _spellStats)
+    /// <param name="_id"></param>
+    public void SetupProjectile(Unit _target, float _speed, SpellStats _spellStats, int _id)
     {
         targetUnit = _target;
         speed = _speed;
         spellStats = _spellStats;
+        projectileID = _id;
+
+        isPaused = false;
 
         targetUnit.onUnitDisable += DisableProjectile;
     }
@@ -114,7 +120,7 @@ public class SpellProjectile : MonoBehaviour, IPausable
     private void DisableProjectile()
     {
         LooseTarget();
-        Destroy(this.gameObject); // Later we need to add pooling
+        gameObject.SetActive(false);
     }
 
     /// <summary>

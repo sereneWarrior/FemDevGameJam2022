@@ -18,22 +18,26 @@ MonoBehaviour:
     cooldown: 0.25
     range: 5
     splashRadius: 0
+    bounce: 0
   - damage: 1
     cooldown: 0.25
     range: 5
     splashRadius: 0
+    bounce: 0
   - damage: 1
     cooldown: 0.25
     range: 5
     splashRadius: 0
+    bounce: 0
   - damage: 1
     cooldown: 0.25
     range: 5
     splashRadius: 0
+    bounce: 0
   - damage: 1
     cooldown: 0.25
     range: 5
     splashRadius: 0
+    bounce: 0
+  projectilePrefabID: 1
   projectileSpeed: 7
-  projectilePrefab: {fileID: 3989755456691343760, guid: c330ac642d25bfc4380eae76a44ff95a,
-    type: 3}
