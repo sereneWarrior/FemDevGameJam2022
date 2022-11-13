@@ -29,6 +29,9 @@ public class UnitHealthbarUI : MonoBehaviour
     private float lastHitTime;
     private bool hasTweenedSlider = true;
 
+    Tween rotationTween;
+    Tween scaleTween;
+
     private void Awake()
     {
         ownRectTransform = GetComponent<RectTransform>();
@@ -41,6 +44,13 @@ public class UnitHealthbarUI : MonoBehaviour
     /// <param name="_unit"></param>
     public void SetupHealthBar(Unit _unit, Color mainSliderColor, Color delaySliderColor, Color sliderBackgroundColor)
     {
+        if (scaleTween != null)
+            scaleTween.Kill();
+        if (rotationTween != null)
+            rotationTween.Kill();
+        ownRectTransform.rotation = Quaternion.identity;
+        ownRectTransform.localScale = Vector3.one;
+
         //Setup sliders
         mainSliderUI.color = mainSliderColor;
         delayedSliderUI.color = delaySliderColor;
@@ -62,6 +72,14 @@ public class UnitHealthbarUI : MonoBehaviour
     /// </summary>
     public void OnDisable()
     {
+        if (scaleTween != null)
+            scaleTween.Kill();
+        if (rotationTween != null)
+            rotationTween.Kill();
+        ownRectTransform.rotation = Quaternion.identity;
+        ownRectTransform.localScale = Vector3.one;
+        hasTweenedSlider = true;
+
         unit.onUnitHealhChanged -= UpdateSlider;
         unit.onUnitDisable -= DisableBar;
     }
@@ -93,10 +111,13 @@ public class UnitHealthbarUI : MonoBehaviour
         if(!hasTweenedSlider && Time.time - lastHitTime > sliderTweenWaitTime)
         {
             hasTweenedSlider = true;
-            DOTween.Kill(ownRectTransform);
+            if (scaleTween != null)
+                scaleTween.Kill();
+            if (rotationTween != null)
+                rotationTween.Kill();
             ownRectTransform.rotation = Quaternion.identity;
             ownRectTransform.localScale = Vector3.one;
-            ownRectTransform.DOPunchScale(Vector3.one * 1.1f, 0.25f, 1).OnComplete(() =>ownRectTransform.localScale = Vector3.one);
+            scaleTween = ownRectTransform.DOPunchScale(Vector3.one * 1.1f, 0.25f, 1).OnComplete(() =>ownRectTransform.localScale = Vector3.one);
             delayedSliderUI.DOFillAmount(mainSliderUI.fillAmount, sliderTweenValueTime);
         }
     }
@@ -108,10 +129,13 @@ public class UnitHealthbarUI : MonoBehaviour
     public void UpdateSlider(float _curHealth)
     {
         mainSliderUI.fillAmount = Utils.ConvertRange(0, unit.maxHealth, 0, 1, _curHealth);
-        DOTween.Kill(ownRectTransform);
+        if (scaleTween != null)
+            scaleTween.Kill();
+        if (rotationTween != null)
+            rotationTween.Kill();
         ownRectTransform.rotation = Quaternion.identity;
         ownRectTransform.localScale = Vector3.one;
-        ownRectTransform.DOPunchRotation(punchRotation, punchDuration);
+        rotationTween = ownRectTransform.DOPunchRotation(punchRotation, punchDuration);
         lastHitTime = Time.time;
         hasTweenedSlider = false;
     }
