@@ -15,30 +15,29 @@ MonoBehaviour:
   spellName: Potion Splash
   leveledSpellStats:
   - damage: 1
-    cooldown: 1
+    cooldown: 2
     range: 10
-    splashRadius: 5
+    splashRadius: 2
     bounce: 0
-  - damage: 1
+  - damage: 2
+    cooldown: 1.75
+    range: 10
+    splashRadius: 2
+    bounce: 0
+  - damage: 3
+    cooldown: 1.5
+    range: 10
+    splashRadius: 3
+    bounce: 0
+  - damage: 4
+    cooldown: 1.25
+    range: 10
+    splashRadius: 3
+    bounce: 0
+  - damage: 5
     cooldown: 1
     range: 10
-    splashRadius: 5
-    bounce: 1
-  - damage: 1
-    cooldown: 1
-    range: 10
-    splashRadius: 5
-    bounce: 2
-  - damage: 1
-    cooldown: 1
-    range: 10
-    splashRadius: 5
-    bounce: 3
-  - damage: 1
-    cooldown: 1
-    range: 10
-    splashRadius: 5
-    bounce: 4
+    splashRadius: 4
+    bounce: 0
+  projectilePrefabID: 0
   projectileSpeed: 7
-  projectilePrefab: {fileID: 3730549586382490163, guid: 2d7ee8eb21032e3419cfa94c9c9c5536,
-    type: 3}

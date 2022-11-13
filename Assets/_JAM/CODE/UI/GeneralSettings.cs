@@ -7,8 +7,6 @@ using TMPro;
 public class GeneralSettings : MonoBehaviour
 {
     [Header("Screen")]
-    [SerializeField] Slider resolutionSlider;
-    [SerializeField] TextMeshProUGUI resolutionText;
     [SerializeField] Toggle fullscreenToggle;
 
     [Header("Sound")]
