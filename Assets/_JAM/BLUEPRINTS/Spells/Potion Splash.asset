@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Potion Splash
   leveledSpellStats:
-  - damage: 1
+  - damage: 3
     cooldown: 5
     range: 10
     splashRadius: 1
@@ -39,5 +39,6 @@ MonoBehaviour:
     range: 18
     splashRadius: 5
     bounce: 0
+  spellCDTimer: 4.2576575
   projectilePrefabID: 0
   projectileSpeed: 9
