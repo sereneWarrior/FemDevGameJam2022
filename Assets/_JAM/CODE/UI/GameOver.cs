@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameOver : MonoBehaviour
 {
     public Unit playerUnit;
+    public TextMeshProUGUI timeText;
 
     private void Awake()
     {
@@ -21,6 +23,10 @@ public class GameOver : MonoBehaviour
     {
         GameManger.SendPauseGameEvent();
         gameObject.SetActive(true);
+        float timer = RunTimer.instance.timer;
+        float minutes = Mathf.Floor(timer / 60);
+        float seconds = Mathf.RoundToInt(timer % 60);
+        timeText.text = minutes.ToString() + ":" + seconds.ToString();
     }
 
     private void OnDestroy()
