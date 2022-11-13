@@ -7,14 +7,14 @@ using UnityEngine.UI;
 public class ExpHandler : MonoBehaviour
 {
     [Header("DESIGN")]
-    [Tooltip("Max level we can reach")]
-    public int maxLevel = 100;
     [Tooltip("Curve we use for the max exp each level")]
     public AnimationCurve maxExpCurve;
 
     [Header("DATA")]
     [Tooltip("Cur Level the Player currently has")]
-    public int curLevel;
+    public float curLevel;
+    [Tooltip("Max level we can reach")]
+    public float maxLevel = 100;
     [Tooltip("If we currently can gain exp")]
     private bool canGetExp = true;
     [Tooltip("The current exp the Player holds")]
@@ -102,8 +102,8 @@ public class ExpHandler : MonoBehaviour
 
         // We update the Cur Exp
         float overflow = curExp - maxExp;
-        curExp = overflow;
         maxExp = maxExpCurve.Evaluate(curLevel / maxLevel);
+        curExp = overflow;
 
         // We update the Slider Values
         UpdateSliderValues();
@@ -114,6 +114,8 @@ public class ExpHandler : MonoBehaviour
     /// </summary>
     private void OnMaxLevelReached()
     {
+        Debug.Log("ExpHandler: We Reached the Max Level!");
+
         curExp = maxExp;
         canGetExp = false;
         UpdateSliderValues();

@@ -70,15 +70,17 @@ public class CardUIHandler : MonoBehaviour
     public void HideCards()
     {
         DOTween.Kill(gameObject);
-        Sequence showSequence = DOTween.Sequence();
+        Sequence hideSequence = DOTween.Sequence();
 
         for (int i = 0; i < spawnedCards.Length; i++)
         {
-            showSequence.Append(spawnedCards[i].transform.DOMove(cardSpawnRect.position, cardSlideDuration));
+            hideSequence.Append(spawnedCards[i].transform.DOMove(cardSpawnRect.position, cardSlideDuration));
             spawnedCards[i].ToggleInteractivity(false);
+            spawnedCards[i].ToggleHighlight(false);
         }
 
-        showSequence.Play();
+        hideSequence.AppendCallback(GameManger.SendUnpauseGameEvent);
+        hideSequence.Play();
     }
 
     /// <summary>

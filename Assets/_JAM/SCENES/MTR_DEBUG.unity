@@ -779,6 +779,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  isPaused: 0
   unitPrefab: {fileID: 7000480495594291739, guid: d83a38ed4ced10c419ec205e10afc770,
     type: 3}
 --- !u!1001 &1155979420

@@ -50,7 +50,6 @@ public class EnemyAI : MonoBehaviour, IPausable
     {
         playerUnit = GameManger.playerUnit;
         playerTransform = playerUnit.transform;
-        Debug.Log(playerTransform);
     }
 
     private void Update()
@@ -90,7 +89,8 @@ public class EnemyAI : MonoBehaviour, IPausable
     public void PauseCode()
     {
         isPaused = true;
-        agent.isStopped = true;
+        if (agent.isActiveAndEnabled)
+            agent.isStopped = true;
     }
 
     /// <summary>
@@ -99,6 +99,7 @@ public class EnemyAI : MonoBehaviour, IPausable
     public void UnpauseCode()
     {
         isPaused = false;
-        agent.isStopped = false;
+        if(agent.isActiveAndEnabled)
+            agent.isStopped = false;
     }
 }

@@ -36,6 +36,9 @@ public class SpellCaster : MonoBehaviour, IPausable
 
     public void Update()
     {
+        if (isPaused)
+            return;
+
         foreach (SpellContainer spell in spellList)
         {
             if(spell.learned)
@@ -71,9 +74,12 @@ public class SpellCaster : MonoBehaviour, IPausable
     /// We upgrade the Spell with the given id in the SpellContainer
     /// </summary>
     /// <param name="_containerID"></param>
-    private void UpgradeSpell(float _containerID)
+    public void UpgradeSpell(int _containerID)
     {
-
+        if (spellList[_containerID].learned)
+            spellList[_containerID].level++;
+        else
+            spellList[_containerID].learned = true;
     }
 
     /// <summary>

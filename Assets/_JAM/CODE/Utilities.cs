@@ -52,7 +52,8 @@ public static class Utilities
         // We go trough each collider and get the closest
         foreach (Collider enemy in collider)
         {
-            enemy.GetComponent<IDamagable>().GetDamage(_damage);
+            if(enemy != null && enemy.gameObject.activeSelf)
+                enemy.GetComponent<IDamagable>().GetDamage(_damage);
         }
     }
 }

@@ -34,8 +34,6 @@ public class PlayerAI : MonoBehaviour
     /// </summary>
     private void OnLevelUp()
     {
-        Debug.Log("GOT LEVEL UP");
-
         // We get the possible Spell upgrades in a List
         List<int> possibleUpgrades = new List<int>();
         List<int> chosenUpgrades = new List<int>();

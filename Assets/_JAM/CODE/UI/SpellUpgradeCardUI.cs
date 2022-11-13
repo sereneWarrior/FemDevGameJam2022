@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using System.Runtime.InteropServices;
 
 public class SpellUpgradeCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
@@ -14,6 +15,7 @@ public class SpellUpgradeCardUI : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     [Header("DATA")]
     public bool isInteractable = false;
+    private Tween shakeTween;
 
     [Header("UI REFERENCES")]
     public TMP_Text nameDisplay;
@@ -22,6 +24,7 @@ public class SpellUpgradeCardUI : MonoBehaviour, IPointerEnterHandler, IPointerE
     public TMP_Text cooldownDisplay;
     public TMP_Text rangeDisplay;
     public TMP_Text splashDisplay;
+    private Vector3 preshakePos;
 
     [Header("REFERENCES")]
     public Image imageRenderer;
@@ -45,7 +48,7 @@ public class SpellUpgradeCardUI : MonoBehaviour, IPointerEnterHandler, IPointerE
         ToggleHighlight(false);
 
         // We set the base display Data
-        nameDisplay.text = spellReference.name;
+        nameDisplay.text = "<color=#1C8E40>" + spellReference.name;
         levelDisplay.text = spellLevel.ToString();
         damageDisplay.text = spellReference.leveledSpellStats[spellLevel].damage.ToString();
         cooldownDisplay.text = spellReference.leveledSpellStats[spellLevel].cooldown.ToString();
@@ -57,6 +60,7 @@ public class SpellUpgradeCardUI : MonoBehaviour, IPointerEnterHandler, IPointerE
             return;
 
         // We display the Upgrade Stats
+        nameDisplay.text = spellReference.name;
         levelDisplay.text = spellLevel + " => <color=#1C8E40>" + (spellLevel + 1);
         damageDisplay.text += " => <color=#1C8E40>" + spellReference.leveledSpellStats[spellLevel + 1].damage;
         cooldownDisplay.text += " => <color=#1C8E40>" + spellReference.leveledSpellStats[spellLevel + 1].cooldown;
@@ -81,11 +85,45 @@ public class SpellUpgradeCardUI : MonoBehaviour, IPointerEnterHandler, IPointerE
     {
         if(_isActive)
         {
-            transform.DOShakePosition(shakeDuration, shakeStrength);
+            ShakeCard();
             imageRenderer.color = highlightColor;
         }
         else
             imageRenderer.color = baseColor;
+    }
+
+    /// <summary>
+    /// We shake the Card
+    /// </summary>
+    private void ShakeCard()
+    {
+        // We first stop the Shake
+        StopShake();
+
+        // We then start the Shake again
+        preshakePos = transform.position;
+        shakeTween = transform.DOShakePosition(shakeDuration, shakeStrength);
+    }
+
+    /// <summary>
+    /// We stop the Shake
+    /// </summary>
+    private void StopShake()
+    {
+        if (shakeTween != null)
+        {
+            shakeTween.Kill();
+            transform.position = preshakePos;
+        }
+    }
+
+    /// <summary>
+    /// We execute this Upgrade
+    /// </summary>
+    private void ExecuteUpgrade()
+    {
+        caster.UpgradeSpell(containerID);
+        CardUIHandler.instance.HideCards();
     }
 
     /// <summary>
@@ -120,5 +158,7 @@ public class SpellUpgradeCardUI : MonoBehaviour, IPointerEnterHandler, IPointerE
     {
         if (!isInteractable)
             return;
+
+        ExecuteUpgrade();
     }
 }

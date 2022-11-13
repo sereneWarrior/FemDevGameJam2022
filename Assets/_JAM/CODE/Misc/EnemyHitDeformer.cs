@@ -23,6 +23,8 @@ public class EnemyHitDeformer : MonoBehaviour
     private void OnDisable()
     {
         unit.onUnitHealhChanged -= OnHealthChange;
+        DOTween.Kill(gameObject);
+        transform.localScale = baseSize;
     }
 
     private void Awake()
