@@ -20,6 +20,7 @@ public class SpellCaster : MonoBehaviour, IPausable
         foreach (SpellContainer spell in spellList)
         {
             spell.level = 0;
+            spell.spellReference.spellCDTimer = 0;
         }
 
         GameManger.onPauseGame += PauseCode;

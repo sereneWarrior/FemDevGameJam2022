@@ -15,29 +15,29 @@ MonoBehaviour:
   spellName: Magic Shot
   leveledSpellStats:
   - damage: 1
-    cooldown: 0.25
+    cooldown: 1
     range: 5
     splashRadius: 0
     bounce: 0
   - damage: 2
-    cooldown: 0.25
-    range: 5
+    cooldown: 0.8
+    range: 6
     splashRadius: 0
     bounce: 0
   - damage: 3
-    cooldown: 0.25
-    range: 5
+    cooldown: 0.6
+    range: 7
     splashRadius: 0
     bounce: 0
   - damage: 4
-    cooldown: 0.25
-    range: 5
+    cooldown: 0.4
+    range: 8
     splashRadius: 0
     bounce: 0
   - damage: 5
-    cooldown: 0.25
-    range: 5
+    cooldown: 0.2
+    range: 9
     splashRadius: 0
     bounce: 0
   projectilePrefabID: 1
-  projectileSpeed: 7
+  projectileSpeed: 9

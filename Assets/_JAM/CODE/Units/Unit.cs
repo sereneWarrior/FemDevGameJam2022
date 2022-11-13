@@ -19,6 +19,8 @@ public class Unit : MonoBehaviour, IDamagable
     public delegate void UnitHealthCallbacks(float _curHealth);
     public UnitHealthCallbacks onUnitHealhChanged;
 
+    public Collider myCollider;
+
     private void OnEnable()
     {
         SetupUnit();
@@ -35,6 +37,8 @@ public class Unit : MonoBehaviour, IDamagable
     private void SetupUnit()
     {
         curHealth = maxHealth;
+        if(myCollider)
+            myCollider.enabled = true;
     }
 
     /// <summary>
@@ -43,6 +47,8 @@ public class Unit : MonoBehaviour, IDamagable
     /// <param name="_damage"></param>
     public void GetDamage(float _damage)
     {
+        Debug.Log("Getting Damage: " + _damage);
+
         curHealth -= _damage;
 
         if (onUnitHealhChanged != null)
@@ -60,12 +66,16 @@ public class Unit : MonoBehaviour, IDamagable
         // We change the Health
         curHealth = 0;
 
+        // We deactivate this Object
+        if(myCollider)
+            myCollider.enabled = false;
+
         // We send the Events
         if (onUnitDeath != null)
             onUnitDeath();
         GameManger.SendUnitDeathEvent(this);
 
-        // We deactivate this Object
-        this.gameObject.SetActive(false);
+        if(gameObject != null)
+            gameObject.SetActive(false);
     }
 }

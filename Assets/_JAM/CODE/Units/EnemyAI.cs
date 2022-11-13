@@ -31,7 +31,6 @@ public class EnemyAI : MonoBehaviour, IPausable
 
         ownTransform = transform;
     }
-
     private void OnEnable()
     {
         UnitHealthBarHandler.instance.RequestHealthBar(unit, false);

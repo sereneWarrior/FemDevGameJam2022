@@ -114,7 +114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curHealth: 0
-  maxHealth: 10
+  maxHealth: 3
+  myCollider: {fileID: 5958496052555753057}
 --- !u!195 &9017321531511147346
 NavMeshAgent:
   m_ObjectHideFlags: 0

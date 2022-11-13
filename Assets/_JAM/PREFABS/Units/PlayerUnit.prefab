@@ -203,9 +203,6 @@ MonoBehaviour:
   - learned: 0
     level: 0
     spellReference: {fileID: 11400000, guid: 4e334ff66b6d1c645992a1eaa0122903, type: 2}
-  - learned: 0
-    level: 0
-    spellReference: {fileID: 11400000, guid: bdd9ee03f36e69e4b91cecf559117da0, type: 2}
   isPaused: 0
 --- !u!114 &8599991636797290070
 MonoBehaviour:

@@ -11,7 +11,8 @@ public abstract class BaseSpell : ScriptableObject
     public List<SpellStats> leveledSpellStats = new List<SpellStats>();
 
     [Header("DATA")]
-    private float spellCDTimer;
+    [HideInInspector]
+    public float spellCDTimer;
 
     /// <summary>
     /// We cast this spell

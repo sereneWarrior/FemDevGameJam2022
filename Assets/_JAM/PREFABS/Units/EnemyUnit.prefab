@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6abe482689ed3e94ab22f1899184d0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPaused: 0
   attackDistance: 1.25
   damage: 1
   damageCooldown: 1
@@ -196,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curHealth: 0
   maxHealth: 3
+  myCollider: {fileID: 5940813050902178341}
 --- !u!195 &9070569888444335894
 NavMeshAgent:
   m_ObjectHideFlags: 0

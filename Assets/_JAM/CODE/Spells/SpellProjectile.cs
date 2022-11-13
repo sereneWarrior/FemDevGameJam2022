@@ -16,6 +16,7 @@ public class SpellProjectile : MonoBehaviour, IPausable
     [Tooltip("SpellData of the Projectile Spell")]
     private SpellStats spellStats;
     private int projectileID;
+    private bool madeDamage = false;
 
     [Header("SPLASH VFX")]
     [Tooltip("Offset spawn position in relation to our Target")]
@@ -53,9 +54,10 @@ public class SpellProjectile : MonoBehaviour, IPausable
         spellStats = _spellStats;
         projectileID = _id;
 
-        isPaused = false;
+        madeDamage = false;
+        UnpauseCode();
 
-        targetUnit.onUnitDisable += DisableProjectile;
+        targetUnit.onUnitDisable += OnUnitDeath;
     }
 
     private void Update()
@@ -92,26 +94,44 @@ public class SpellProjectile : MonoBehaviour, IPausable
     /// </summary>
     public void MakeDamage()
     {
-        if (spellStats.splashRadius == 0)
-            targetUnit.GetDamage(spellStats.damage);
-        else
-        {
-            Utilities.DamageAllInRange(targetUnit.transform.position, spellStats.splashRadius, spellStats.damage, GameManger.enemyLayer);
-            OnSplashDamage();
-        }
+        if (madeDamage)
+            return;
 
+        if (spellStats.splashRadius == 0)
+        {
+            targetUnit.GetDamage(spellStats.damage);
+            madeDamage = true;
+        }
+        
+        DisableProjectile();
     }
 
     /// <summary>
     /// Gets called when we make Splash Damage
     /// </summary>
-    private void OnSplashDamage()
+    private void MakeSplashDamage()
     {
+        if (madeDamage)
+            return;
+
+        if (spellStats.splashRadius > 0)
+            Utilities.DamageAllInRange(targetUnit.transform.position, spellStats.splashRadius, spellStats.damage, GameManger.enemyLayer);
+
         if (splashVFX == null || targetUnit == null)
             return;
 
         Vector3 splashPos = new Vector3(targetUnit.transform.position.x + spawnOffset.x, targetUnit.transform.position.y + spawnOffset.y, targetUnit.transform.position.z + spawnOffset.z);
         Instantiate(splashVFX, splashPos, Quaternion.identity);
+
+        madeDamage = true;
+    }
+
+    /// <summary>
+    /// Gets called when the Unit Dies
+    /// </summary>
+    private void OnUnitDeath()
+    {
+        DisableProjectile();
     }
 
     /// <summary>
@@ -119,6 +139,7 @@ public class SpellProjectile : MonoBehaviour, IPausable
     /// </summary>
     private void DisableProjectile()
     {
+        MakeSplashDamage();
         LooseTarget();
         gameObject.SetActive(false);
     }
