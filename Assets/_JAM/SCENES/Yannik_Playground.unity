@@ -449,6 +449,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyUnit (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7000480495594291739, guid: d83a38ed4ced10c419ec205e10afc770,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9070569888444335892, guid: d83a38ed4ced10c419ec205e10afc770,
         type: 3}
       propertyPath: attackDistance
@@ -756,6 +761,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyUnit (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7000480495594291739, guid: d83a38ed4ced10c419ec205e10afc770,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9070569888444335892, guid: d83a38ed4ced10c419ec205e10afc770,
         type: 3}
       propertyPath: attackDistance
@@ -1049,6 +1059,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyUnit
+      objectReference: {fileID: 0}
+    - target: {fileID: 7000480495594291739, guid: d83a38ed4ced10c419ec205e10afc770,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9070569888444335892, guid: d83a38ed4ced10c419ec205e10afc770,
         type: 3}
@@ -1891,6 +1906,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyUnit (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7000480495594291739, guid: d83a38ed4ced10c419ec205e10afc770,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9070569888444335892, guid: d83a38ed4ced10c419ec205e10afc770,
         type: 3}
       propertyPath: attackDistance
@@ -2148,8 +2168,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visuals: {fileID: 2137003402}
+  animator: {fileID: 0}
   moveSpeed: 10
   turnSpeed: 250
+  isPaused: 0
 --- !u!114 &1827067984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2190,6 +2212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   castPosOffset: {x: 0, y: 1.5, z: 0}
   spellList: []
+  isPaused: 0
 --- !u!1 &2008202728
 GameObject:
   m_ObjectHideFlags: 0

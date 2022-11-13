@@ -56,18 +56,6 @@ public static class GameManger
     }
 
     /// <summary>
-    /// We Pause the Game
-    /// </summary>
-    /// <param name="isPaused"></param>
-    public static void PauseGame(bool isPaused)
-    {
-        if (isPaused)
-            Time.timeScale = 0;
-        else
-            Time.timeScale = 1;
-    }
-
-    /// <summary>
     /// We send the Unit Death Event
     /// </summary>
     /// <param name="_unit"></param>

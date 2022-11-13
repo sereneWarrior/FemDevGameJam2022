@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 8371946017811573963}
   - component: {fileID: 700983526215913355}
   - component: {fileID: 1451935104286636275}
+  - component: {fileID: 3869716279105117064}
   m_Layer: 5
   m_Name: Credits
   m_TagString: Untagged
@@ -269,6 +270,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3869716279105117064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1765635132368760861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef32acb98cce094d95bb5851773dc1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenOptions:
+  - tweenType: 1
+    duration: 0.2
+    strength: 1.5
+    onlyEnter: 0
 --- !u!1 &2445133070355551460
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +299,7 @@ GameObject:
   - component: {fileID: 2445133070355551464}
   - component: {fileID: 2445133070355551465}
   - component: {fileID: 2445133070355551466}
+  - component: {fileID: 7632270977796756461}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -403,6 +422,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7632270977796756461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2445133070355551460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef32acb98cce094d95bb5851773dc1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenOptions:
+  - tweenType: 1
+    duration: 0.2
+    strength: 1.5
+    onlyEnter: 0
 --- !u!1 &2445133070451557431
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,6 +639,7 @@ GameObject:
   - component: {fileID: 2445133070763952409}
   - component: {fileID: 2445133070763952410}
   - component: {fileID: 2445133070763952411}
+  - component: {fileID: 81089036932031329}
   m_Layer: 5
   m_Name: StartGame
   m_TagString: Untagged
@@ -725,6 +762,23 @@ MonoBehaviour:
           m_StringArgument: MTR_DEBUG
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &81089036932031329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2445133070763952405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef32acb98cce094d95bb5851773dc1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenOptions:
+  - tweenType: 1
+    duration: 0.2
+    strength: 1.5
+    onlyEnter: 0
 --- !u!1 &2445133070900048671
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,6 +926,7 @@ GameObject:
   - component: {fileID: 2445133071796592168}
   - component: {fileID: 2445133071796592169}
   - component: {fileID: 2445133071796592170}
+  - component: {fileID: 7426842324390514314}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -994,6 +1049,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7426842324390514314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2445133071796592164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef32acb98cce094d95bb5851773dc1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenOptions:
+  - tweenType: 1
+    duration: 0.2
+    strength: 1.5
+    onlyEnter: 0
 --- !u!1 &2445133071841412143
 GameObject:
   m_ObjectHideFlags: 0

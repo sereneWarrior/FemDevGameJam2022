@@ -7,7 +7,8 @@ using TMPro;
 public class GeneralSettings : MonoBehaviour
 {
     [Header("Screen")]
-    [SerializeField] TMP_Dropdown resolutionDropdown;
+    [SerializeField] Slider resolutionSlider;
+    [SerializeField] TextMeshProUGUI resolutionText;
     [SerializeField] Toggle fullscreenToggle;
 
     [Header("Sound")]
@@ -20,8 +21,6 @@ public class GeneralSettings : MonoBehaviour
     static bool isFullscreen = false;
     int currentResolution = 1080;
     int savedScreenResolution = 3;
-
-    public static Action<bool> onOptionOpen;
 
     private void Awake()
     {
@@ -39,7 +38,8 @@ public class GeneralSettings : MonoBehaviour
 
     private void Start()
     {
-        AudioManager.instance.Play("BG");
+        if(AudioManager.instance != null)
+            AudioManager.instance.Play("BG");
 
 
         //Loading Screen Settings
@@ -47,7 +47,7 @@ public class GeneralSettings : MonoBehaviour
         {
             savedScreenResolution = PlayerPrefs.GetInt("ScreenResolution");
             SetResolution(savedScreenResolution);
-            resolutionDropdown.value = savedScreenResolution;
+            resolutionSlider.value = savedScreenResolution;
             if (!hasSetDisplay)
             {
                 hasSetDisplay = true;
@@ -80,14 +80,12 @@ public class GeneralSettings : MonoBehaviour
             soundPercentage.text = Mathf.RoundToInt(soundSlider.value).ToString() + "%";
         if (musicPercentage != null)
             musicPercentage.text = Mathf.RoundToInt(musicSlider.value).ToString() + "%";
-
-        GameManger.PauseGame(false);
         gameObject.SetActive(false);
     }
 
-    public void SetResolution(int newScreenResolution)
+    public void SetResolution(float newScreenResolution)
     {
-        savedScreenResolution = newScreenResolution;
+        savedScreenResolution = Mathf.RoundToInt(newScreenResolution);
         switch ((ScreenResolution)newScreenResolution)
         {
             case ScreenResolution.UltraHD:
@@ -108,6 +106,7 @@ public class GeneralSettings : MonoBehaviour
         }
         Screen.SetResolution(Mathf.RoundToInt((float)currentResolution * screenRatio), currentResolution, isFullscreen);
         Screen.fullScreen = isFullscreen;
+        resolutionText.text = currentResolution.ToString() + "p";
         PlayerPrefs.SetInt("ScreenResolution", savedScreenResolution);
     }
 
@@ -162,9 +161,10 @@ public class GeneralSettings : MonoBehaviour
     {
         if (gameObject.activeInHierarchy)
             SaveSettings();
-        if (onOptionOpen != null)
-            onOptionOpen(!gameObject.activeInHierarchy);
-        GameManger.PauseGame(!gameObject.activeInHierarchy);
+        if (gameObject.activeInHierarchy)
+            GameManger.SendUnpauseGameEvent();
+        else
+            GameManger.SendPauseGameEvent();
         gameObject.SetActive(!gameObject.activeInHierarchy);
     }
 
@@ -176,8 +176,8 @@ public class GeneralSettings : MonoBehaviour
 
 public enum ScreenResolution
 {
+    HDReady,
     FullHD,
     UltraHD,
     WQHD,
-    HDReady,
 }
