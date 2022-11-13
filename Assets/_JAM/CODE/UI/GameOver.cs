@@ -36,7 +36,7 @@ public class GameOver : MonoBehaviour
         {
             secondsString = "0" + Mathf.RoundToInt(seconds).ToString();
         }
-        timeText.text = minutes.ToString() + ":" + seconds.ToString();
+        timeText.text = minutesString + ":" + secondsString;
     }
 
     private void OnDestroy()
